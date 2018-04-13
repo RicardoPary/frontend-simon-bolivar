@@ -1,5 +1,23 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <a class="navbar-brand" href="#">SB Admin Angular5 BS4 </a>
+
+
+  <div class="collapse navbar-collapse" id="nav-main">
+    <!-- Start Header Links -->
+    <ul class="nav navbar-nav mainmenu">
+      <li *ngFor="let menu of menus" routerLinkActive="active">
+        <a routerLink="{{menu.Pageurl}}" (click)="clickRouter();">
+          <i class="{{menu.Imgclass}}"></i> <span>{{menu.LinkText}}</span>
+        </a>
+      </li>
+    </ul>
+    <!-- End Header Links -->
+  </div>
+
+
+
+
+
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <!-- <span class="navbar-toggler-icon"></span> -->
         <i class="fa fa-bars text-muted" aria-hidden="true"></i>

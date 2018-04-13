@@ -10,6 +10,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
 
+  public menus = [
+    { Imgclass: 'fa fa-home', Pageurl: "dashboard", LinkText:"Dashboard" },
+    { Imgclass: 'fa fa-home', Pageurl: "application", LinkText: "Applications" },
+    { Imgclass: 'fa fa-home', Pageurl: "accounts", LinkText: "Accounts" },
+    { Imgclass: 'fa fa-home', Pageurl: "search", LinkText: "Search" },
+    { Imgclass: 'fa fa-home', Pageurl: "watchlist", LinkText: "Watchlist" }
+  ];
+
     constructor(private translate: TranslateService, public router: Router) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
