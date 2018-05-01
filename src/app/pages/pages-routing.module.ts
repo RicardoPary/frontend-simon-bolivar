@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutComponent } from './layout.component';
+import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: LayoutComponent,
+        component: PagesComponent,
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
@@ -24,4 +24,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class LayoutRoutingModule {}
+export class PagesRoutingModule {}

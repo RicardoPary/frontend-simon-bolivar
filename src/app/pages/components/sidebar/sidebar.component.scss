@@ -22,7 +22,7 @@ $topnav-background-color: #222;
     // border-top: 1px solid rgba(255,255,255,0.3);
     .list-group {
         a.list-group-item {
-            background: $topnav-background-color;
+            background: #252e4f;
             border: 0;
             border-radius: 0;
             color: #999;
@@ -41,7 +41,7 @@ $topnav-background-color: #222;
         }
         .header-fields {
             padding-top: 10px;
-        
+
             > .list-group-item:first-child {
                 border-top: 1px solid rgba(255, 255, 255, 0.2);
             }
