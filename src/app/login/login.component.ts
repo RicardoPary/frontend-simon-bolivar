@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
+import {ActividadCivicaService} from '../shared/services/actividad-civica.service';
+import {ReunionService} from '../shared/services/reunion.service';
+import {LoginService} from '../shared/auth';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +12,21 @@ import { routerTransition } from '../router.animations';
   animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
+
   public sliders: Array<any> = [];
-  constructor(public router: Router) {
+
+
+  password: string;
+  username: string;
+
+
+  reuniones: any = [];
+  actividadesCivicas: any = [];
+
+  constructor(public router: Router,
+              private actividadCivicaService: ActividadCivicaService,
+              private reunionService: ReunionService,
+              private loginService: LoginService) {
     this.sliders.push(
       {
         imagePath: 'assets/images/slider1.jpg',
@@ -32,9 +48,32 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.actividadCivicaService.getActividadCivica().subscribe(
+      res => console.log(res)
+    );
+
+    this.reunionService.getReunion().subscribe(
+      res => console.log(res)
+    );
+
+  }
 
   onLoggedin() {
     localStorage.setItem('isLoggedin', 'true');
   }
+
+
+  login (form) {
+    console.log(form);
+    this.loginService.login ({
+      username: form.value.username,
+      password: form.value.password,
+      rememberMe: false
+    }).then (() => {
+      this.router.navigate (['/dashboard']);
+    }).catch ((e) => console.log(e));
+  }
+
 }

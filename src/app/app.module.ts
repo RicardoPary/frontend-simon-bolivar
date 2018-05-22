@@ -16,6 +16,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './shared';
+import {LoginService} from './shared/auth';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -45,7 +46,9 @@ export function createTranslateLoader(http: HttpClient) {
     NgbModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

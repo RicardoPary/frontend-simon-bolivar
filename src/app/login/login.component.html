@@ -23,6 +23,39 @@
           </li>
         </ul>
       </div>
+
+
+
+      <form (ngSubmit)="login(form)" #form="ngForm">
+        <fieldset>
+          <div class="form-group">
+            <input type="text"
+                   name="username"
+                   id="username"
+                   class="form-control"
+                   autocomplete="off"
+                   placeholder="Nombre de Usuario"
+                   required minlength="3"
+                   maxlength="50"
+                   #username
+                   ngModel>
+          </div>
+          <div class="form-group">
+            <input type="password"
+                   name="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="Password"
+                   required minlength="4"
+                   maxlength="50"
+                   #password
+                   ngModel>
+          </div>
+          <button type="submit" class="btn btn-primary">INGRESAR</button>
+        </fieldset>
+      </form>
+
+
     </div>
   </nav>
 
