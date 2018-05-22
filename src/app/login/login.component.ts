@@ -51,11 +51,17 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.actividadCivicaService.getActividadCivica().subscribe(
-      res => console.log(res)
+      res => {
+        console.log(res);
+        this.actividadesCivicas = res.body;
+      }
     );
 
     this.reunionService.getReunion().subscribe(
-      res => console.log(res)
+      res => {
+        console.log(res);
+        this.reuniones = res.body;
+      }
     );
 
   }
