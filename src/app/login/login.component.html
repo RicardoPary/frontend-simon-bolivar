@@ -18,42 +18,59 @@
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contactos</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact"
-               [routerLink]="['/dashboard']" (click)="onLoggedin()">Login</a>
+
+
+            <div class="dropdown">
+              <button class="dropbtn" (click)="openModal()">Acceder</button>
+              <div style="border: 1px solid #1a252f; z-index: 9999; position: absolute;" *ngIf="viewLogin">
+
+
+
+
+                <form (ngSubmit)="login(form)" #form="ngForm">
+                 <fieldset>
+                   <div class="form-group">
+                     <input type="text"
+                            name="username"
+                            id="username"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="Nombre de Usuario"
+                            required minlength="3"
+                            maxlength="50"
+                            #username
+                            ngModel>
+                   </div>
+                   <div class="form-group">
+                     <input type="password"
+                            name="password"
+                            id="password"
+                            class="form-control"
+                            placeholder="Password"
+                            required minlength="4"
+                            maxlength="50"
+                            #password
+                            ngModel>
+                   </div>
+                   <button type="submit" class="btn btn-primary">INGRESAR</button>
+                 </fieldset>
+               </form>
+              </div>
+            </div>
+
+
+
+
+
+
+
           </li>
         </ul>
       </div>
 
 
 
-      <form (ngSubmit)="login(form)" #form="ngForm">
-        <fieldset>
-          <div class="form-group">
-            <input type="text"
-                   name="username"
-                   id="username"
-                   class="form-control"
-                   autocomplete="off"
-                   placeholder="Nombre de Usuario"
-                   required minlength="3"
-                   maxlength="50"
-                   #username
-                   ngModel>
-          </div>
-          <div class="form-group">
-            <input type="password"
-                   name="password"
-                   id="password"
-                   class="form-control"
-                   placeholder="Password"
-                   required minlength="4"
-                   maxlength="50"
-                   #password
-                   ngModel>
-          </div>
-          <button type="submit" class="btn btn-primary">INGRESAR</button>
-        </fieldset>
-      </form>
+
 
 
     </div>

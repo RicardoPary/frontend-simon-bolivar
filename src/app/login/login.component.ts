@@ -4,6 +4,8 @@ import { routerTransition } from '../router.animations';
 import {ActividadCivicaService} from '../shared/services/actividad-civica.service';
 import {ReunionService} from '../shared/services/reunion.service';
 import {LoginService} from '../shared/auth';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {LoginModalComponent} from './login-modal/login-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   public sliders: Array<any> = [];
 
+  viewLogin = false;
 
   password: string;
   username: string;
@@ -26,7 +29,8 @@ export class LoginComponent implements OnInit {
   constructor(public router: Router,
               private actividadCivicaService: ActividadCivicaService,
               private reunionService: ReunionService,
-              private loginService: LoginService) {
+              private loginService: LoginService,
+              private modalService: NgbModal) {
     this.sliders.push(
       {
         imagePath: 'assets/images/slider1.jpg',
@@ -80,6 +84,10 @@ export class LoginComponent implements OnInit {
     }).then (() => {
       this.router.navigate (['/dashboard']);
     }).catch ((e) => console.log(e));
+  }
+
+  openModal() {
+    this.modalService.open(LoginModalComponent);
   }
 
 }
