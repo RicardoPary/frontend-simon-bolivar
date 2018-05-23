@@ -101,26 +101,19 @@
 
   </header>
 
-  <!-- Portfolio Grid Section -->
-  <section class="portfolio" id="portfolio">
+
+  <section class="portfolio">
 
     <div class="container">
-
-
-      <h2 class="text-center text-uppercase text-secondary mb-0">Portafolio</h2>
-      <hr class="star-dark mb-5">
-
-
-
       <div class="row">
 
 
-        <div class="col-6">
+        <div class="col-xs-12	col-sm-12	col-md-6	col-lg-6">
 
           <h2>REUNIONES</h2>
 
-          <div class="card text-white bg-primary mb-3" style="max-width: 30rem;" *ngFor="let reunion of reuniones">
-            <div class="card-header">Fecha {{reunion.fecha}}</div>
+          <div style="max-width: 30rem; border: 1px solid #4d5159; height: 200px;" *ngFor="let reunion of reuniones">
+            <div class="card-header" style="background-color: #97b1cc">Fecha {{reunion.fecha}}</div>
             <div class="card-body">
               <h5 class="card-title">Lugar {{reunion.lugar}}</h5>
               <p class="card-text">{{reunion.nombre}}</p>
@@ -131,12 +124,12 @@
         </div>
 
 
-        <div class="col-6">
+        <div class="col-xs-12	col-sm-12	col-md-6	col-lg-6">
 
           <h2>ACTIVIDADES</h2>
 
-          <div class="card text-white bg-primary mb-3" style="max-width: 30rem;" *ngFor="let actividadCivica of actividadesCivicas">
-            <div class="card-header">Fecha {{actividadCivica.fecha}}</div>
+          <div style="max-width: 30rem; border: 1px solid #4d5159; height: 200px;" *ngFor="let actividadCivica of actividadesCivicas">
+            <div class="card-header" style="background-color: grey;">Fecha {{actividadCivica.fecha}}</div>
             <div class="card-body">
               <h5 class="card-title">Lugar {{actividadCivica.lugar}}</h5>
               <p class="card-text">{{actividadCivica.nombre}}</p>
@@ -146,19 +139,24 @@
         </div>
 
       </div>
+    </div>
 
 
 
 
+  </section>
 
 
 
 
+  <!-- Portfolio Grid Section -->
+  <section class="portfolio" id="portfolio">
+
+    <div class="container">
 
 
-
-
-
+      <h2 class="text-center text-uppercase text-secondary mb-0">Portafolio</h2>
+      <hr class="star-dark mb-5">
 
 
       <div class="row">
