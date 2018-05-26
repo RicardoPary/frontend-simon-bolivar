@@ -17,6 +17,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './shared';
 import {LoginService} from './shared/auth';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -35,6 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    Ng2Webstorage.forRoot({prefix: 'kke-pro', separator: '-'}),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

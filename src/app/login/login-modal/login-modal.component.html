@@ -9,7 +9,7 @@
 <div class="modal-body">
   <div class="form">
 
-    <form class="login-form">
+    <form (ngSubmit)="login(form)" #form="ngForm">
       <input type="text"
              placeholder="username"
              name="username"
