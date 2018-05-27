@@ -10,6 +10,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginModalComponent implements OnInit {
 
+
   constructor(private loginService: LoginService,
               public router: Router,
               private modalService: NgbModal) { }

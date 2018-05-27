@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open(LoginModalComponent);
+    this.modalService.open(LoginModalComponent, );
   }
 
 }
