@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
 const routes: Routes = [
-  { path: '', loadChildren: './pages/pages.module#PagesModule', canActivate: [AuthGuard] },
+  { path: '', loadChildren: './pages/pages.module#PagesModule'},
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
   { path: 'error', loadChildren: './server-error/server-error.module#ServerErrorModule' },

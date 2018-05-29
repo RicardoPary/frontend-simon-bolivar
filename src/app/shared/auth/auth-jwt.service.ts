@@ -21,7 +21,7 @@ export class AuthServerProvider {
       password: credentials.password,
       rememberMe: credentials.rememberMe
     };
-    return this.http.post('http://192.168.1.4:8080/api/authenticate', data).map(authenticateSuccess.bind(this));
+    return this.http.post('http://localhost:8080/api/authenticate', data).map(authenticateSuccess.bind(this));
 
     function authenticateSuccess(resp) {
       console.log(resp);
