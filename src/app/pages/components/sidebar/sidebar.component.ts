@@ -12,6 +12,11 @@ export class SidebarComponent {
     showMenu: string = '';
     pushRightClass: string = 'push-right';
 
+  isCollapsedUsuarios = true;
+   isCollapsedRegistros = true;
+   isCollapsedActividades = true;
+    isCollapsedDatosAcademicos = true;
+
     constructor(private translate: TranslateService, public router: Router) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
