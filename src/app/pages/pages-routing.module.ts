@@ -20,6 +20,8 @@ const routes: Routes = [
             { path: 'estudiante', loadChildren: './estudiante/estudiante.module#EstudianteModule' },
             { path: 'docente', loadChildren: './docente/docente.module#DocenteModule' },
             { path: 'tutor', loadChildren: './tutor/tutor.module#TutorModule' },
+            { path: 'reunion', loadChildren: './reunion/reunion.module#ReunionModule' },
+            { path: 'actividad-civica', loadChildren: './actividad-civica/actividad-civica.module#ActividadCivicaModule' },
             { path: 'plantel-administrativo', loadChildren: './plantel-administrativo/plantel-administrativo.module#PlantelAdministrativoModule' }
         ]
     }

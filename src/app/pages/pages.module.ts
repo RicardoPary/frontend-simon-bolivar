@@ -8,6 +8,7 @@ import { PagesComponent } from './pages.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -20,6 +21,7 @@ import { HeaderComponent } from './components/header/header.component';
       PagesComponent,
       SidebarComponent,
       HeaderComponent
+
     ]
 })
 export class PagesModule {}

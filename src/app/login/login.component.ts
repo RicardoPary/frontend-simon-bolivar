@@ -6,6 +6,7 @@ import {ReunionService} from '../shared/services/reunion.service';
 import {LoginService} from '../shared/auth';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginModalComponent} from './login-modal/login-modal.component';
+import {DocenteFilter} from '../shared/models/docente';
 
 @Component({
   selector: 'app-login',
@@ -54,14 +55,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.actividadCivicaService.getActividadCivica().subscribe(
+    this.actividadCivicaService.getAllDocentes(new DocenteFilter()).subscribe(
       res => {
         console.log(res);
         this.actividadesCivicas = res.body;
       }
     );
 
-    this.reunionService.getReunion().subscribe(
+    this.reunionService.getAllDocentes(new DocenteFilter()).subscribe(
       res => {
         console.log(res);
         this.reuniones = res.body;

@@ -81,10 +81,10 @@
         </a>
         <ul [ngbCollapse]="isCollapsedActividades">
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Actividades Civicas' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/actividad-civica']" [routerLinkActive]="['router-link-active']"><span>{{ 'Actividades Civicas' | translate }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Reuniones' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/reunion']" [routerLinkActive]="['router-link-active']"><span>{{ 'Reuniones' | translate }}</span></a>
           </li>
         </ul>
 
