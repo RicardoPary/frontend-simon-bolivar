@@ -40,17 +40,15 @@
           <span><i class="fa fa-plus"></i>&nbsp; {{ 'Usuarios' | translate }}</span>
         </a>
         <ul [ngbCollapse]="isCollapsedUsuarios">
-          <li>
-            <a href="javascript:void(0)"><span>{{ 'Persona' | translate }}</span></a>
-          </li>
+
           <li>
             <a href="javascript:void(0)"><span>{{ 'Tutor' | translate }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Estudiante' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/estudiante']" [routerLinkActive]="['router-link-active']"><span>{{ 'Estudiante' | translate }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Docente' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/docente']" [routerLinkActive]="['router-link-active']"><span>{{ 'Docente' | translate }}</span></a>
           </li>
          <li>
            <a href="javascript:void(0)"><span>{{ 'Plantel Administrativo' | translate }}</span></a>

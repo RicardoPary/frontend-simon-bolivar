@@ -10,7 +10,7 @@ import {environment} from '../environments/environment';
 
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -18,6 +18,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './shared';
 import {LoginService} from './shared/auth';
 import {Ng2Webstorage} from 'ngx-webstorage';
+import {httpFactoryProvider, RequestInterceptor} from './shared/interceptor';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -49,7 +50,13 @@ export function createTranslateLoader(http: HttpClient) {
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    httpFactoryProvider(),
+    [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    }],
   ],
   bootstrap: [AppComponent]
 })

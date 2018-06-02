@@ -16,7 +16,11 @@ import { HeaderComponent } from './components/header/header.component';
         NgbDropdownModule.forRoot(),
         NgbCollapseModule
     ],
-    declarations: [PagesComponent, SidebarComponent, HeaderComponent]
+    declarations: [
+      PagesComponent,
+      SidebarComponent,
+      HeaderComponent
+    ]
 })
 export class PagesModule {}
 

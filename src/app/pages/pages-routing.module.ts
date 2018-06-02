@@ -16,7 +16,9 @@ const routes: Routes = [
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-            { path: 'bimestre', loadChildren: './bimestre/bimestre.module#BimestreModule' }
+            { path: 'bimestre', loadChildren: './bimestre/bimestre.module#BimestreModule' },
+            { path: 'estudiante', loadChildren: './estudiante/estudiante.module#EstudianteModule' },
+            { path: 'docente', loadChildren: './docente/docente.module#DocenteModule' }
         ]
     }
 ];
