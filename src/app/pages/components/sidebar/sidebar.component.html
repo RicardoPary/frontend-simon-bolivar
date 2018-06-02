@@ -42,7 +42,7 @@
         <ul [ngbCollapse]="isCollapsedUsuarios">
 
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Tutor' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/tutor']" [routerLinkActive]="['router-link-active']"><span>{{ 'Tutor' | translate }}</span></a>
           </li>
           <li>
             <a href="javascript:void(0)" [routerLink]="['/estudiante']" [routerLinkActive]="['router-link-active']"><span>{{ 'Estudiante' | translate }}</span></a>
@@ -51,7 +51,7 @@
             <a href="javascript:void(0)" [routerLink]="['/docente']" [routerLinkActive]="['router-link-active']"><span>{{ 'Docente' | translate }}</span></a>
           </li>
          <li>
-           <a href="javascript:void(0)"><span>{{ 'Plantel Administrativo' | translate }}</span></a>
+           <a href="javascript:void(0)" [routerLink]="['/plantel-administrativo']" [routerLinkActive]="['router-link-active']"><span>{{ 'Plantel Administrativo' | translate }}</span></a>
           </li>
         </ul>
 

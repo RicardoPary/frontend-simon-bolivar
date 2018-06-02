@@ -18,7 +18,9 @@ const routes: Routes = [
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'bimestre', loadChildren: './bimestre/bimestre.module#BimestreModule' },
             { path: 'estudiante', loadChildren: './estudiante/estudiante.module#EstudianteModule' },
-            { path: 'docente', loadChildren: './docente/docente.module#DocenteModule' }
+            { path: 'docente', loadChildren: './docente/docente.module#DocenteModule' },
+            { path: 'tutor', loadChildren: './tutor/tutor.module#TutorModule' },
+            { path: 'plantel-administrativo', loadChildren: './plantel-administrativo/plantel-administrativo.module#PlantelAdministrativoModule' }
         ]
     }
 ];
