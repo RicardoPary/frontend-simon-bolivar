@@ -1,13 +1,13 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}" style="background: #252e4f;">
       <div class="list-group" style="background: #252e4f;">
           <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-             <i class="fa fa-fw fa-dashboard"></i>{{ 'Dashboard' | translate }}
+             <i class="fa fa-fw fa-dashboard"></i>{{ 'Dashboard'  }}
           </a>
           <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-bar-chart-o"></i>{{ 'Charts' | translate }}
+              <i class="fa fa-fw fa-bar-chart-o"></i>{{ 'Charts'  }}
           </a>
           <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-table"></i>{{ 'Tables' | translate }}
+              <i class="fa fa-fw fa-table"></i>{{ 'Tables' }}
           </a>
           <!--<a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
               <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
@@ -37,18 +37,18 @@
       <div class="nested-menu">
         <a class="list-group-item" (click)="isCollapsedUsuarios = !isCollapsedUsuarios"
                      [attr.aria-expanded]="!isCollapsedUsuarios" aria-controls="collapse">
-          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Usuarios' | translate }}</span>
+          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Usuarios'  }}</span>
         </a>
         <ul [ngbCollapse]="isCollapsedUsuarios">
 
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/tutor']" [routerLinkActive]="['router-link-active']"><span>{{ 'Tutor' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/tutor']" [routerLinkActive]="['router-link-active']"><span>{{ 'Tutor' }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/estudiante']" [routerLinkActive]="['router-link-active']"><span>{{ 'Estudiante' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/estudiante']" [routerLinkActive]="['router-link-active']"><span>{{ 'Estudiante' }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/docente']" [routerLinkActive]="['router-link-active']"><span>{{ 'Docente' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/docente']" [routerLinkActive]="['router-link-active']"><span>{{ 'Docente'  }}</span></a>
           </li>
          <li>
            <a href="javascript:void(0)" [routerLink]="['/plantel-administrativo']" [routerLinkActive]="['router-link-active']"><span>{{ 'Plantel Administrativo' | translate }}</span></a>
@@ -61,14 +61,14 @@
       <div class="nested-menu">
         <a class="list-group-item" (click)="isCollapsedRegistros = !isCollapsedRegistros"
                      [attr.aria-expanded]="!isCollapsedRegistros" aria-controls="collapse">
-          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Registros' | translate }}</span>
+          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Registros'  }}</span>
         </a>
         <ul [ngbCollapse]="isCollapsedRegistros">
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Inscripcion' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Inscripcion'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Filiacion' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Filiacion'  }}</span></a>
           </li>
         </ul>
       </div>
@@ -77,14 +77,14 @@
       <div class="nested-menu">
         <a class="list-group-item" (click)="isCollapsedActividades = !isCollapsedActividades"
                      [attr.aria-expanded]="!isCollapsedActividades" aria-controls="collapse">
-          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Actividades' | translate }}</span>
+          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Actividades' }}</span>
         </a>
         <ul [ngbCollapse]="isCollapsedActividades">
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/actividad-civica']" [routerLinkActive]="['router-link-active']"><span>{{ 'Actividades Civicas' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/actividad-civica']" [routerLinkActive]="['router-link-active']"><span>{{ 'Actividades Civicas' }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/reunion']" [routerLinkActive]="['router-link-active']"><span>{{ 'Reuniones' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/reunion']" [routerLinkActive]="['router-link-active']"><span>{{ 'Reuniones' }}</span></a>
           </li>
         </ul>
 
@@ -94,29 +94,29 @@
       <div class="nested-menu">
         <a class="list-group-item" (click)="isCollapsedDatosAcademicos = !isCollapsedDatosAcademicos"
                    [attr.aria-expanded]="!isCollapsedDatosAcademicos" aria-controls="collapse">
-          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Datos Academicos' | translate }}</span>
+          <span><i class="fa fa-plus"></i>&nbsp; {{ 'Datos Academicos'  }}</span>
         </a>
         <ul [ngbCollapse]="isCollapsedDatosAcademicos">
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Materia' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Materia'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Horario' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Horario'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Aula' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Aula'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Curso' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Curso'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Plan Pedagogico' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Plan Pedagogico'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)" [routerLink]="['/bimestre']" [routerLinkActive]="['router-link-active']"><span>{{ 'Nota Bimestral' | translate }}</span></a>
+            <a href="javascript:void(0)" [routerLink]="['/bimestre']" [routerLinkActive]="['router-link-active']"><span>{{ 'Nota Bimestral'  }}</span></a>
           </li>
           <li>
-            <a href="javascript:void(0)"><span>{{ 'Boletin' | translate }}</span></a>
+            <a href="javascript:void(0)"><span>{{ 'Boletin'  }}</span></a>
           </li>
         </ul>
       </div>
@@ -128,7 +128,7 @@
               </a>
               <div class="nested-menu">
                   <a class="list-group-item" (click)="addExpandClass('languages')">
-                      <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
+                      <span><i class="fa fa-language"></i>&nbsp; {{ 'Language'  }} <b class="caret"></b></span>
                   </a>
                   <li class="nested" [class.expand]="showMenu === 'languages'">
                       <ul class="submenu">
