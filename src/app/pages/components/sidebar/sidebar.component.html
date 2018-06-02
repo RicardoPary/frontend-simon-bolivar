@@ -1,14 +1,12 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}" style="background: #252e4f;">
       <div class="list-group" style="background: #252e4f;">
           <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-             <i class="fa fa-fw fa-dashboard"></i>{{ 'Dashboard'  }}
+             <i class="fa fa-fw fa-dashboard"></i>{{ 'Principal'  }}
           </a>
           <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-bar-chart-o"></i>{{ 'Charts'  }}
+              <i class="fa fa-fw fa-bar-chart-o"></i>{{ 'Metricas'  }}
           </a>
-          <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-              <i class="fa fa-fw fa-table"></i>{{ 'Tables' }}
-          </a>
+
           <!--<a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
               <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
           </a>-->

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../shared/auth';
 import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login-modal',
@@ -10,10 +10,13 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginModalComponent implements OnInit {
 
+  modalReference: NgbModalRef;
+
 
   constructor(private loginService: LoginService,
               public router: Router,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
@@ -26,6 +29,9 @@ export class LoginModalComponent implements OnInit {
       rememberMe: false
     }).then (() => {
       console.log('entro');
+
+      this.activeModal.close();
+
       this.router.navigate (['/dashboard']);
     }).catch ((e) => console.log(e));
   }
