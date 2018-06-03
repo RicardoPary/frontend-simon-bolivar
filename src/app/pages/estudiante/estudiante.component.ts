@@ -3,6 +3,7 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {EstudianteService} from '../../shared/services/estudiante.service';
 import {PersonaService} from '../../shared/services/persona.service';
 import {EstudianteFilter} from '../../shared/models/estudiante';
+import {DocenteFilter} from '../../shared/models/docente';
 
 @Component({
   selector: 'app-estudiante',
@@ -24,6 +25,24 @@ export class EstudianteComponent implements OnInit {
     {
       name: 'ci',
       displayName: 'CI',
+      canSort: true,
+      canFilter: true,
+      pattern: '',
+      messageError: '',
+      type: 'text'
+    },
+    {
+      name: 'matricula',
+      displayName: 'Matricula',
+      canSort: true,
+      canFilter: true,
+      pattern: '',
+      messageError: '',
+      type: 'text'
+    },
+    {
+      name: 'tipo',
+      displayName: 'Tipo',
       canSort: true,
       canFilter: true,
       pattern: '',
@@ -151,11 +170,13 @@ export class EstudianteComponent implements OnInit {
         console.log(res);
 
         this.estudianteService.createEstudiante({
-          'matricula': 'dsfsdfsdf',
-          'tipo': 'strindsfdsfsdfg',
+          'matricula': form.value.matricula,
+          'tipo': form.value.tipo,
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
+            this.estudianteService.sendEstudianteFilter(new DocenteFilter());
+            this.estudianteService.sendEstudianteFilter(new DocenteFilter());
             this.modal.close();
             console.log(res2);
           }

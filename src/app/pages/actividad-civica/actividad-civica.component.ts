@@ -57,6 +57,15 @@ export class ActividadCivicaComponent implements OnInit {
       pattern: '',
       messageError: '',
       type: 'text'
+    },
+    {
+      name: '',
+      displayName: 'Acciones',
+      canSort: true,
+      canFilter: true,
+      pattern: '',
+      messageError: '',
+      type: 'actions'
     }
   ];
 
@@ -99,6 +108,8 @@ export class ActividadCivicaComponent implements OnInit {
     }).subscribe(
       res => {
         console.log(res);
+        this.actividadCivicaService.sendDocenteFilter(new DocenteFilter());
+        this.actividadCivicaService.sendDocenteFilter(new DocenteFilter());
         this.modal.close();
 
       }

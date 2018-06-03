@@ -6,13 +6,15 @@ import {TableModule} from '../../shared/modules/table/table.module';
 import {DocenteRoutingModule} from './docente-routing.module';
 import {PersonaService} from '../../shared/services/persona.service';
 import {DocenteService} from '../../shared/services/docente.service.';
+import {NgBusyModule} from 'ng-busy';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     TableModule,
-    DocenteRoutingModule
+    DocenteRoutingModule,
+    NgBusyModule
   ],
   declarations: [
     DocenteComponent

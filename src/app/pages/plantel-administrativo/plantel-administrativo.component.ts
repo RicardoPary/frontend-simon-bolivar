@@ -157,6 +157,8 @@ export class PlantelAdministrativoComponent implements OnInit {
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
+            this.plantelAdministrativoService.sendDocenteFilter(new DocenteFilter());
+            this.plantelAdministrativoService.sendDocenteFilter(new DocenteFilter());
             this.modal.close();
             console.log(res2);
           }

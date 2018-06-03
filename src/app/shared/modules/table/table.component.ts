@@ -21,7 +21,7 @@ export class TableComponent implements OnChanges {
   @Input() page: number;
   @Input() total: number;
   @Input() filtersColumns: any;
-  @Input() minHeight: any = '250px';
+  @Input() minHeight: any = '500px';
 
   @Output() clickRow = new EventEmitter<any>();
   @Output() clickButton = new EventEmitter<any>();

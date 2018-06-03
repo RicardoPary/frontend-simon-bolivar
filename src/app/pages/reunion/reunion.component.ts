@@ -82,6 +82,15 @@ export class ReunionComponent implements OnInit {
       pattern: '',
       messageError: '',
       type: 'text'
+    },
+    {
+      name: '',
+      displayName: 'Acciones',
+      canSort: true,
+      canFilter: true,
+      pattern: '',
+      messageError: '',
+      type: 'actions'
     }
   ];
 
@@ -126,6 +135,8 @@ export class ReunionComponent implements OnInit {
       'ordenDia': form.value.ordenDia
     }).subscribe(
       res => {
+        this.reunionService.sendDocenteFilter(new DocenteFilter());
+        this.reunionService.sendDocenteFilter(new DocenteFilter());
         this.modal.close();
         console.log(res);
       }

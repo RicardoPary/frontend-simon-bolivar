@@ -1,12 +1,12 @@
 <div class="table-content">
-  <h3> REGISTRO DOCENTES
-    <span class="btn-options">
+  <h3 style="font-family: sans-serif;"> REGISTRO DOCENTES
+    <span class="btn-options pull-right">
       <a class="btn btn-sm btn-outline-secondary btn-icon-space"
          (click)="openModal(modalEstudiante)"><i
         class="icon-user-plus"></i> Nuevo Docente</a>
     </span>
   </h3>
-  <div class="table-box">
+  <div class="table-box" [ngBusy]="{busy: subscriptionTable, message: 'Cargando...'}">
     <app-table
       [data]="estudiantes"
       [headers]="headersColumns"
@@ -127,6 +127,17 @@
           <label for="telefono">Telefono</label>
           <input id="telefono"
                  name="telefono"
+                 type="text"
+                 class="form-control"
+                 ngModel/>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mb-3">
+          <label for="grado">Grado</label>
+          <input id="grado"
+                 name="grado"
                  type="text"
                  class="form-control"
                  ngModel/>

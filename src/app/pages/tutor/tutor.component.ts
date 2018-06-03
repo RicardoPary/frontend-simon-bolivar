@@ -32,6 +32,15 @@ export class TutorComponent implements OnInit {
       type: 'text'
     },
     {
+      name: 'parentesco',
+      displayName: 'Parentesco',
+      canSort: true,
+      canFilter: true,
+      pattern: '',
+      messageError: '',
+      type: 'text'
+    },
+    {
       name: 'nombre',
       displayName: 'Nombre',
       canSort: true,
@@ -153,10 +162,12 @@ export class TutorComponent implements OnInit {
 
         this.tutorService.createDocente({
           'idEstudiante': 2,
-          'parentesco': 'primo',
+          'parentesco': form.value.parentesco,
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
+            this.tutorService.sendDocenteFilter(new DocenteFilter());
+            this.tutorService.sendDocenteFilter(new DocenteFilter());
             this.modal.close();
             console.log(res2);
           }

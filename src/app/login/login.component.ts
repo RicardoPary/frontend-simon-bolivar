@@ -35,20 +35,20 @@ export class LoginComponent implements OnInit {
     this.sliders.push(
       {
         imagePath: 'assets/images/colegio1.jpg',
-        label: 'First slide label',
+        label: 'Acto Civico Dia Del Maestro',
         text:
-          'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+          'Palabras del Docente de Lenguaje.'
       },
       {
         imagePath: 'assets/images/colegio2.jpg',
-        label: 'Second slide label',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        label: 'Colegio Simon Bolivar A',
+        text: 'Nueva Construccion'
       },
       {
         imagePath: 'assets/images/colegio3.jpg',
-        label: 'Third slide label',
+        label: 'Baile por Alumnos del nivel basico',
         text:
-          'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+          'Dia de la madre'
       }
     );
   }

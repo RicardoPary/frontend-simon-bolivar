@@ -5,6 +5,7 @@ import {PersonaService} from '../../shared/services/persona.service';
 import {EstudianteService} from '../../shared/services/estudiante.service';
 import {DocenteService} from '../../shared/services/docente.service.';
 import {DocenteFilter} from '../../shared/models/docente';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-docente',
@@ -18,6 +19,8 @@ export class DocenteComponent implements OnInit {
   totalEstudiantes: number;
   pageSize: number;
   page: number;
+
+  subscriptionTable: Subscription = new Subscription();
 
 
   modal: NgbModalRef;
@@ -124,7 +127,7 @@ export class DocenteComponent implements OnInit {
   }
 
   callService(docenteFilter: DocenteFilter) {
-    this.docenteService.getAllDocentes(docenteFilter).subscribe(res => {
+    this.subscriptionTable = this.docenteService.getAllDocentes(docenteFilter).subscribe(res => {
       console.log(res.body);
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
@@ -153,11 +156,13 @@ export class DocenteComponent implements OnInit {
         console.log(res);
 
         this.docenteService.createDocente({
-          'grado': 'asdasdasd',
+          'grado': form.value.grado,
           'idTrabajador': 0,
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
+            this.docenteService.sendDocenteFilter(new DocenteFilter());
+            this.docenteService.sendDocenteFilter(new DocenteFilter());
             this.modal.close();
             console.log(res2);
           }
