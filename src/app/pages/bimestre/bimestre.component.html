@@ -1,91 +1,133 @@
-<table border="1" style="border: 1px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
+
+<button (click)="saveBimestre()" class="btn btn-primary">Guardar</button>
+<br>
+<br>
+
+<table width="100%" border="1" style="border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
+
+  <tr>
+    <td style="width: 210px;"><div style="margin-left: 60px;"><img src="../../assets/images/escudo.jpg" alt="" title="" border="1" width="80" height="70"/></div></td>
+    <td rowspan="3" colspan="3"><div style="text-align: center; font-weight: bold; font-size: 20px; font-family: Arial, Helvetica, sans-serif;">REGISTRO DE NOTAS</div></td>
+  </tr>
+  <tr>
+    <td><div style="text-align: center;">UNIDAD EDUCATIVA</div></td>
+  </tr>
+  <tr>
+    <td><div style="text-align: center;">SIMON BOLIVAR</div></td>
+  </tr>
+  <tr>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">DOCENTE :</div></td>
+    <td style="width: 500px;">S</td>
+    <td style="width: 200px;"><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">GESTION :</div></td>
+    <td>2018 </td>
+  </tr>
+  <tr>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">AREA :</div></td>
+    <td>S</td>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">NIVEL :</div></td>
+    <td>S</td>
+  </tr>
+  <tr>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">BIMESTRE :</div></td>
+    <td>1er Bimestre</td>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">CURSO :</div></td>
+    <td>S</td>
+  </tr>
+
+</table>
+
+<br>
+
+<table border="1" style="border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
   <tbody>
-  <tr>
-    <td rowspan="3" style="background: mediumturquoise; width: 20px;">Nº</td>
-    <td rowspan="3" width="200" style="background: mediumturquoise;">APELLIDOS Y NOMBRES</td>
-    <td colspan="28" height="15" style="background: mediumturquoise; text-align: center;">DIMENSIONES</td>
-    <td rowspan="2" width="10" style="background: #e7c172"><div class="Rotate-90">SER</div></td>
-    <td rowspan="2" width="10" style="background: #e7c172"><div class="Rotate-90">DECIDIR</div></td>
-    <td rowspan="3" width="10" height="190"><div class="Rotate-90" style="width: 160px; margin-left: -60px; margin-right: -60px;">PROMEDIO AUTOEVALUACION</div></td>
-    <td rowspan="3" width="10"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">NOTA BIMESTRAL FINAL</div></td>
-    <td rowspan="3" width="10"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">INDICADOR CUALITATIVO</div></td>
-    <td rowspan="3" width="10"><div class="Rotate-90" style="width: 70px;">OBSERVACION</div></td>
+  <tr style="border: 2px solid black;">
+    <td rowspan="3" style="background: #daeef3; width: 20px; font-size: 14px; font-weight: bold;">Nº</td>
+    <td rowspan="3" width="200" style="background: #daeef3; border-left: 2px solid black; border-right: 2px solid black; font-size: 15px; font-weight: bold;">APELLIDOS Y NOMBRES</td>
+    <td colspan="28" height="15" style="background: #daeef3; text-align: center; font-size: 14px; font-weight: bold;">DIMENSIONES</td>
+    <td rowspan="2" width="10" style="background: #ffffcc;"><div class="Rotate-90">SER</div></td>
+    <td rowspan="2" width="10" style="background: #ffffcc;"><div class="Rotate-90">DECIDIR</div></td>
+    <td rowspan="3" width="10" height="190" style="background: #fde9d9;"><div class="Rotate-90" style="width: 160px; margin-left: -60px; margin-right: -60px;">PROMEDIO AUTOEVALUACION</div></td>
+    <td rowspan="3" width="10" style="background: #a7ffe2;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">NOTA BIMESTRAL FINAL</div></td>
+    <td rowspan="3" width="10" style="background: #daeef3;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">INDICADOR CUALITATIVO</div></td>
+    <td rowspan="3" width="10" style="background: #daeef3;"><div class="Rotate-90"  style="width: 70px; font-size: 14px; font-weight: bold;">OBSERVACION</div></td>
   </tr>
   <tr>
-    <td colspan="7" height="15" style="background: #e7c172; width: 200px;">SER (10)</td>
-    <td colspan="7" style="background: #e7c172; width: 200px;">SABER (35)</td>
-    <td colspan="7" style="background: #e7c172; width: 200px;">SABER (35)</td>
-    <td colspan="7" style="background: #e7c172; width: 200px;">DECIDIR (10)</td>
+    <td colspan="7" height="15" style="background: #ffffcc; width: 200px;">SER (10)</td>
+    <td colspan="7" style="background: #ffffcc; width: 200px;">SABER (35)</td>
+    <td colspan="7" style="background: #ffffcc; width: 200px;">HABER (35)</td>
+    <td colspan="7" style="background: #ffffcc; width: 200px;">DECIDIR (10)</td>
   </tr>
-  <tr style="height: 100px;">
+  <tr style="height: 100px; border: 2px solid black;">
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
+    <td style="background: #daeef3; border-left: 2px solid black; border-right: 2px solid black;"> <div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;  font-size: 11px; text-align: center; font-weight: bold;">PROMEDIO</div></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
+    <td style="background: #daeef3; border-left: 2px solid black; border-right: 2px solid black;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;  font-size: 11px; text-align: center; font-weight: bold;">PROMEDIO</div></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
+    <td style="background: #daeef3; border-left: 2px solid black; border-right: 2px solid black;"> <div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;  font-size: 11px; text-align: center; font-weight: bold;">PROMEDIO</div></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td style="height: 120px; width: 10px;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">AUTOEVALUACION(5)</div></td>
-    <td style="height: 120px; width: 10px;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -60px;">AUTOEVALUACION(5)</div></td>
+    <td style="background: #daeef3; border-left: 2px solid black; border-right: 2px solid black;"> <div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;  font-size: 11px; text-align: center; font-weight: bold;">PROMEDIO</div></td>
+    <td style="height: 120px; width: 10px; background: #ccff99;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -50px;">AUTOEVALUACION(5)</div></td>
+    <td style="height: 120px; width: 10px; background: #ccff99;"><div class="Rotate-90" style="width: 130px; margin-left: -50px; margin-right: -60px;">AUTOEVALUACION(5)</div></td>
   </tr>
   <tr style="height: 20px;" *ngFor="let bimestre of bimestres, let i = index">
-    <td>{{i + 1}}</td>
-    <td>{{bimestre.apellidosNombres}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer1"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer2"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer3"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer4"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer5"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSer6"></td>
-    <td style="width: 20px;">{{bimestre.serPromedio}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber1"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber2"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber3"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber4"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber5"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaSaber6"></td>
-    <td style="width: 20px;">{{bimestre.saberPromedio}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer1"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer2"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer3"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer4"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer5"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaHacer6"></td>
-    <td style="width: 20px;">{{bimestre.hacerPromedio}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir1"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir2"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir3"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir4"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir5"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.notaDecir6"></td>
-    <td style="width: 20px;">{{bimestre.decirPromedio}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.autoevaluacionSer"></td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.autoevaluacionDecir"></td>
-    <td>{{bimestre.promedioAutoevaluacion}}</td>
-    <td>{{bimestre.notaBimestralFinal}}</td>
-    <td><input type="text" style="width: 20px;" [(ngModel)]="bimestre.indicadorCualitativo"></td>
-    <td><input type="text" [(ngModel)]="bimestre.observacion"></td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; ">{{i + 1}}</td>
+    <td style="border-right: 2px solid black;">{{bimestre.apellidosNombres}}</td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer1"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer2"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer3"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer4"></td>
+    <td><input type="text" style="width: 20px; border: none;"  [(ngModel)]="bimestre.notaSer5"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer6"></td>
+    <td style="width: 20px; border-right: 2px solid black; background: #daeef3;">{{getPromedio(bimestre.notaSer1, bimestre.notaSer2, bimestre.notaSer3, bimestre.notaSer4, bimestre.notaSer5, bimestre.notaSer6) | number:'1.2'}}</td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber1"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber2"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber3"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber4"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber5"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSaber6"></td>
+    <td style="width: 20px; border-right: 2px solid black; background: #daeef3;">{{getPromedio(bimestre.notaSaber1, bimestre.notaSaber2, bimestre.notaSaber3, bimestre.notaSaber4, bimestre.notaSaber5, bimestre.notaSaber6) | number:'1.2'}}</td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer1"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer2"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer3"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer4"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer5"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaHacer6"></td>
+    <td style="width: 20px; border-right: 2px solid black; background: #daeef3;">{{getPromedio(bimestre.notaHacer1, bimestre.notaHacer2, bimestre.notaHacer3, bimestre.notaHacer4, bimestre.notaHacer5, bimestre.notaHacer6) | number:'1.2'}}</td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir1"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir2"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir3"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir4"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir5"></td>
+    <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaDecir6"></td>
+    <td style="width: 20px; border-right: 2px solid black; background: #daeef3;">{{bimestre.decirPromedio}}</td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; "><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.autoevaluacionSer"></td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; "><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.autoevaluacionDecir"></td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; background: #fde9d9;">{{bimestre.promedioAutoevaluacion}}</td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; background: #a7ffe2;">{{bimestre.notaBimestralFinal}}</td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; "><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.indicadorCualitativo"></td>
+    <td style="border-left: 2px solid black; border-right: 2px solid black; "><input type="text" style="border: none;" [(ngModel)]="bimestre.observacion"></td>
   </tr>
   </tbody>
 </table>
+
+
