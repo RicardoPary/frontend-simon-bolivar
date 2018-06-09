@@ -2,9 +2,9 @@ import { Injectable, Injector } from '@angular/core';
 import { ConnectionBackend, Headers, Http, RequestOptions, RequestOptionsArgs, Response } from '@angular/http';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs/index';
+import 'rxjs/index';
+import 'rxjs/index';
 
 import { LoginService } from '../services/login.service';
 import { environment } from '../../../environments/environment';
@@ -19,7 +19,7 @@ export class InterceptedHttp extends Http {
     super(backend, defaultOptions);
   }
 
-  get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+  /*get(url: string, options?: RequestOptionsArgs): Observable<Response> {
     this.requestInterceptor();
     return this.intercept(
       super.get(this.getFullUrl(url), this.requestOptions(options))
@@ -123,7 +123,7 @@ export class InterceptedHttp extends Http {
       }
       return Observable.throw(error);
     });
-  }
+  }*/
 
   private getFullUrl(url: string): string {
     // return full URL to API here

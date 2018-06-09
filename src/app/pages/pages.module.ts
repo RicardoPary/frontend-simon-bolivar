@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import {NgbCollapseModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { PagesRoutingModule } from './pages-routing.module';
@@ -13,7 +12,6 @@ import { HeaderComponent } from './components/header/header.component';
     imports: [
         CommonModule,
         PagesRoutingModule,
-        TranslateModule,
         NgbDropdownModule.forRoot(),
         NgbCollapseModule
     ],

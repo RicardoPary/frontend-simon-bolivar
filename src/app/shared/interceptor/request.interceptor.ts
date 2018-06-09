@@ -1,11 +1,12 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/index';
 
 import { environment } from '../../../environments/environment';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import { LoginService } from '../services/login.service';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -33,11 +34,11 @@ export class RequestInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(req)
-      .map((event: HttpEvent<any>) => {
+    return next.handle(req).pipe(
+      map((event: HttpEvent<any>) => {
         return event;
-      })
-      .catch((err: any) => {
+      }),
+      catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             console.warn(`Unauthorized Error: ${err.status}, Logout and redirect to Login`);
@@ -48,6 +49,6 @@ export class RequestInterceptor implements HttpInterceptor {
           }
           return Observable.throw(err);
         }
-      });
+      }));
   }
 }

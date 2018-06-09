@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -12,12 +11,9 @@ export class HeaderComponent implements OnInit {
 
 
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(public router: Router) {
 
-        this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
-        this.translate.setDefaultLang('en');
-        const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
+
 
         this.router.events.subscribe(val => {
             if (
@@ -52,6 +48,6 @@ export class HeaderComponent implements OnInit {
     }
 
     changeLang(language: string) {
-        this.translate.use(language);
+
     }
 }

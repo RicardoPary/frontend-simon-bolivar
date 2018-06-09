@@ -132,37 +132,37 @@
                       <ul class="submenu">
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('en')">
-                                  {{ 'English' | translate }}
+                                  {{ 'English'  }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('fr')">
-                                  {{ 'French' | translate }}
+                                  {{ 'French'  }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('ur')">
-                                  {{ 'Urdu' | translate }}
+                                  {{ 'Urdu'  }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('es')">
-                                  {{ 'Spanish' | translate }}
+                                  {{ 'Spanish'  }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('it')">
-                                  {{ 'Italian' | translate }}
+                                  {{ 'Italian'  }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('fa')">
-                                  {{ 'Farsi' | translate }}
+                                  {{ 'Farsi' }}
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)" (click)="changeLang('de')">
-                                  {{ 'German' | translate }}
+                                  {{ 'German' }}
                               </a>
                           </li>
                       </ul>
@@ -176,22 +176,22 @@
                       <ul class="submenu">
                           <li>
                               <a href="javascript:void(0)">
-                                  <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</span>
+                                  <span><i class="fa fa-fw fa-user"></i> {{ 'Profile'  }}</span>
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)">
-                                  <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}</span>
+                                  <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' }}</span>
                               </a>
                           </li>
                           <li>
                               <a href="javascript:void(0)">
-                                  <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
+                                  <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings'  }}</span>
                               </a>
                           </li>
                           <li>
                               <a [routerLink]="['/login']" (click)="onLoggedout()">
-                                  <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
+                                  <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out'  }}</span>
                               </a>
                           </li>
                       </ul>
@@ -206,43 +206,43 @@
         </a>
         <div class="nested-menu">
           <a class="list-group-item" (click)="addExpandClass('languages')">
-            <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
+            <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' }} <b class="caret"></b></span>
           </a>
           <li class="nested" [class.expand]="showMenu === 'languages'">
             <ul class="submenu">
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('en')">
-                  {{ 'English' | translate }}
+                  {{ 'English' }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('fr')">
-                  {{ 'French' | translate }}
+                  {{ 'French'  }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('ur')">
-                  {{ 'Urdu' | translate }}
+                  {{ 'Urdu'  }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('es')">
-                  {{ 'Spanish' | translate }}
+                  {{ 'Spanish'  }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('it')">
-                  {{ 'Italian' | translate }}
+                  {{ 'Italian'  }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('fa')">
-                  {{ 'Farsi' | translate }}
+                  {{ 'Farsi'  }}
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)" (click)="changeLang('de')">
-                  {{ 'German' | translate }}
+                  {{ 'German'  }}
                 </a>
               </li>
             </ul>
@@ -256,22 +256,22 @@
             <ul class="submenu">
               <li>
                 <a href="javascript:void(0)">
-                  <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</span>
+                  <span><i class="fa fa-fw fa-user"></i> {{ 'Profile'}}</span>
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)">
-                  <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}</span>
+                  <span><i class="fa fa-fw fa-envelope"></i> {{ 'Inbox'  }}</span>
                 </a>
               </li>
               <li>
                 <a href="javascript:void(0)">
-                  <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
+                  <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings'  }}</span>
                 </a>
               </li>
               <li>
                 <a [routerLink]="['/login']" (click)="onLoggedout()">
-                  <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
+                  <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out'  }}</span>
                 </a>
              </li>
            </ul>

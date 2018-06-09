@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/index';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthServerProvider {
@@ -21,7 +22,7 @@ export class AuthServerProvider {
       password: credentials.password,
       rememberMe: credentials.rememberMe
     };
-    return this.http.post('api/authenticate', data).map(authenticateSuccess.bind(this));
+    return this.http.post('api/authenticate', data).pipe(map(authenticateSuccess.bind(this)));
 
     function authenticateSuccess(resp) {
       console.log(resp);

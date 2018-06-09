@@ -5,7 +5,7 @@ import {PersonaService} from '../../shared/services/persona.service';
 import {EstudianteService} from '../../shared/services/estudiante.service';
 import {DocenteService} from '../../shared/services/docente.service.';
 import {DocenteFilter} from '../../shared/models/docente';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs/index';
 
 @Component({
   selector: 'app-docente',
