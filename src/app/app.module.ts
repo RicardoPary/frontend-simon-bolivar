@@ -11,6 +11,7 @@ import {AuthGuard} from './shared';
 import {LoginService} from './shared/auth';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import {httpFactoryProvider, RequestInterceptor} from './shared/interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
 // AoT requires an exported function for factories
 
 
@@ -26,7 +27,8 @@ import {httpFactoryProvider, RequestInterceptor} from './shared/interceptor';
     HttpClientModule,
     Ng2Webstorage.forRoot({prefix: 'kke-pro', separator: '-'}),
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AuthGuard,
