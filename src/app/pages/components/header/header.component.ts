@@ -1,53 +1,63 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
+import {CuentaService} from '../../../shared/services/cuenta.service';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    pushRightClass: string = 'push-right';
+
+  pushRightClass = 'push-right';
+
+  cuenta: any;
 
 
+  constructor(public router: Router,
+              private cuentaService: CuentaService) {
 
-    constructor(public router: Router) {
 
+    this.router.events.subscribe(val => {
+      if (
+        val instanceof NavigationEnd &&
+        window.innerWidth <= 992 &&
+        this.isToggled()
+      ) {
+        this.toggleSidebar();
+      }
+    });
+  }
 
+  ngOnInit() {
 
-        this.router.events.subscribe(val => {
-            if (
-                val instanceof NavigationEnd &&
-                window.innerWidth <= 992 &&
-                this.isToggled()
-            ) {
-                this.toggleSidebar();
-            }
-        });
-    }
+    this.cuentaService.getCuenta().subscribe(res => {
+      console.log(res);
+      this.cuenta = res.body;
+    });
 
-    ngOnInit() {}
+  }
 
-    isToggled(): boolean {
-        const dom: Element = document.querySelector('body');
-        return dom.classList.contains(this.pushRightClass);
-    }
+  isToggled(): boolean {
+    const dom: Element = document.querySelector('body');
+    return dom.classList.contains(this.pushRightClass);
+  }
 
-    toggleSidebar() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle(this.pushRightClass);
-    }
+  toggleSidebar() {
+    const dom: any = document.querySelector('body');
+    dom.classList.toggle(this.pushRightClass);
+  }
 
-    rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
-    }
+  rltAndLtr() {
+    const dom: any = document.querySelector('body');
+    dom.classList.toggle('rtl');
+  }
 
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
-    }
+  onLoggedout() {
+    localStorage.removeItem('isLoggedin');
+  }
 
-    changeLang(language: string) {
+  changeLang(language: string) {
 
-    }
+  }
 }
