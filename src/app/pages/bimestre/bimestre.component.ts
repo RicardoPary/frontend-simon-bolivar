@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Bimiestre} from './bimestre';
 import {BimestreService} from '../../shared/services/bimestre.service';
+import {MateriaService} from '../../shared/services/materia.service';
+import {CursoService} from '../../shared/services/curso.service';
 
 @Component({
   selector: 'app-bimestre',
@@ -10,11 +12,31 @@ import {BimestreService} from '../../shared/services/bimestre.service';
 export class BimestreComponent implements OnInit {
 
   bimestres: Bimiestre [] = [];
+  cursos: any = [];
+  materias: any = [];
 
-  constructor(private bimestreService: BimestreService) {
+  constructor(private bimestreService: BimestreService,
+              private materiaService: MateriaService,
+              private cursoService: CursoService) {
   }
 
   ngOnInit() {
+
+    this.cursoService.getAllCursos().subscribe(
+      res => {
+        console.log(res);
+        this.cursos = res.body;
+      }
+    );
+
+    this.materiaService.getAllMaterias().subscribe(
+      res => {
+        console.log(res);
+        this.materias = res.body;
+      }
+    );
+
+
     this.bimestres.push(new Bimiestre());
     this.bimestres.push(new Bimiestre());
     this.bimestres.push(new Bimiestre());

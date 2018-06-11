@@ -3,6 +3,27 @@
 <br>
 <br>
 
+<div class="row">
+
+  <div class="form-group" class="col-3">
+    <label for="curso">Cursos</label>
+    <select class="form-control" id="curso">
+      <option [value]="curso.nombre" *ngFor="let curso of cursos">{{curso.nombre}}</option>
+    </select>
+  </div>
+
+  <div class="form-group" class="col-3">
+    <label for="materia">Cursos</label>
+    <select class="form-control" id="materia">
+      <option [value]="materia.nombre" *ngFor="let materia of materias">{{materia.nombre}}</option>
+    </select>
+  </div>
+
+</div>
+
+<br>
+
+
 <table width="100%" border="1" style="border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
 
   <tr>

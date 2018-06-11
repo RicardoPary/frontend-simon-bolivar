@@ -4,6 +4,8 @@ import {BimestreRoutingModule} from './bimestre-routing.module';
 import {BimestreComponent} from './bimestre.component';
 import {FormsModule} from '@angular/forms';
 import {BimestreService} from '../../shared/services/bimestre.service';
+import {CursoService} from '../../shared/services/curso.service';
+import {MateriaService} from '../../shared/services/materia.service';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import {BimestreService} from '../../shared/services/bimestre.service';
     BimestreComponent
   ],
   providers: [
-    BimestreService
+    BimestreService,
+    CursoService,
+    MateriaService
   ]
 })
 export class BimestreModule {
