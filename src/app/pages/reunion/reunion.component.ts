@@ -149,4 +149,18 @@ export class ReunionComponent implements OnInit {
     this.modal.close();
   }
 
+
+  clickPagination(event: any) {
+    const filter = this.reunionService.getDocenteFilter();
+    filter.page = (event.newPage) - 1;
+    this.reunionService.sendDocenteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.reunionService.getDocenteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.reunionService.sendDocenteFilter(filter);
+  }
+
 }

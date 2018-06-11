@@ -179,4 +179,17 @@ export class DocenteComponent implements OnInit {
     this.modal.close();
   }
 
+  clickPagination(event: any) {
+    const filter = this.docenteService.getDocenteFilter();
+    filter.page = (event.newPage) - 1;
+    this.docenteService.sendDocenteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.docenteService.getDocenteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.docenteService.sendDocenteFilter(filter);
+  }
+
 }

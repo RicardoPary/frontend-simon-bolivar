@@ -65,7 +65,7 @@ export class CursoComponent implements OnInit {
               private cursoService: CursoService,
               private router: Router) {
 
-    this.actividadCivicaService.currentDocenteFilter().subscribe(
+    this.cursoService.currentCursoFilter().subscribe(
       dates => {
         this.pageSize = dates.size;
         this.page = dates.page;
@@ -79,7 +79,7 @@ export class CursoComponent implements OnInit {
   }
 
   callService(docenteFilter: DocenteFilter) {
-    this.cursoService.getAllCursos().subscribe(res => {
+    this.cursoService.getAllCursos(docenteFilter).subscribe(res => {
       console.log(res.body);
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
@@ -123,6 +123,20 @@ export class CursoComponent implements OnInit {
       this.router.navigate(['/bimestre', event.item.id, 2]);
     }
 
+  }
+
+
+  clickPagination(event: any) {
+    const filter = this.cursoService.getCursoFilter();
+    filter.page = (event.newPage) - 1;
+    this.cursoService.sendCursoFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.cursoService.getCursoFilter();
+    filter.sort = [event.column + ',' + state];
+    this.cursoService.sendCursoFilter(filter);
   }
 
 }

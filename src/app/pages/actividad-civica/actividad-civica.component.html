@@ -13,7 +13,9 @@
       [total]="totalEstudiantes"
       [pageSize]="pageSize"
       [filtersColumns]="filtersColumns"
-      [page]="page">
+      [page]="page"
+      (clickPagination)="clickPagination($event)"
+      (clickSort)="clickSort($event)">
     </app-table>
   </div>
 </div>

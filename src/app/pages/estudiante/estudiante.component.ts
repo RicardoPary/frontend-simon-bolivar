@@ -193,4 +193,18 @@ export class EstudianteComponent implements OnInit {
     this.modal.close();
   }
 
+
+  clickPagination(event: any) {
+    const filter = this.estudianteService.getEstudianteFilter();
+    filter.page = (event.newPage) - 1;
+    this.estudianteService.sendEstudianteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.estudianteService.getEstudianteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.estudianteService.sendEstudianteFilter(filter);
+  }
+
 }

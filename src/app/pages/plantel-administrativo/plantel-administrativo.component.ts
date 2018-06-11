@@ -175,4 +175,18 @@ export class PlantelAdministrativoComponent implements OnInit {
     this.modal.close();
   }
 
+
+  clickPagination(event: any) {
+    const filter = this.plantelAdministrativoService.getDocenteFilter();
+    filter.page = (event.newPage) - 1;
+    this.plantelAdministrativoService.sendDocenteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.plantelAdministrativoService.getDocenteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.plantelAdministrativoService.sendDocenteFilter(filter);
+  }
+
 }

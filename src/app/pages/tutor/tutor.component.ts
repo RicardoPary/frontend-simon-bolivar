@@ -184,4 +184,18 @@ export class TutorComponent implements OnInit {
     this.modal.close();
   }
 
+
+  clickPagination(event: any) {
+    const filter = this.tutorService.getDocenteFilter();
+    filter.page = (event.newPage) - 1;
+    this.tutorService.sendDocenteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.tutorService.getDocenteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.tutorService.sendDocenteFilter(filter);
+  }
+
 }

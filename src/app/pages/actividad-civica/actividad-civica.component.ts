@@ -122,4 +122,17 @@ export class ActividadCivicaComponent implements OnInit {
     this.modal.close();
   }
 
+  clickPagination(event: any) {
+    const filter = this.actividadCivicaService.getDocenteFilter();
+    filter.page = (event.newPage) - 1;
+    this.actividadCivicaService.sendDocenteFilter(filter);
+  }
+
+  clickSort(event: any) {
+    const state = event.isDesc ? 'desc' : 'asc';
+    const filter = this.actividadCivicaService.getDocenteFilter();
+    filter.sort = [event.column + ',' + state];
+    this.actividadCivicaService.sendDocenteFilter(filter);
+  }
+
 }

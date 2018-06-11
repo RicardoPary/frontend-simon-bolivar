@@ -107,12 +107,12 @@
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li>
           <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="updatePagination(1)">
-            <i class="mdi mdi-chevron-double-left" aria-hidden="true"></i>
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
           </a>
         </li>
         <li>
           <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="updatePagination(pager.currentPage - 1)">
-            <i class="mdi mdi-chevron-left" aria-hidden="true"></i>
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
           </a>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
@@ -121,12 +121,12 @@
         <li>
           <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
              (click)="updatePagination(pager.currentPage + 1)">
-            <i class="mdi mdi-chevron-right" aria-hidden="true"></i>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
           </a>
         </li>
         <li>
           <a [ngClass]="{disabled:pager.currentPage >= pager.totalPages}" (click)="updatePagination(pager.totalPages)">
-            <i class="mdi mdi-chevron-double-right" aria-hidden="true"></i>
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
           </a>
         </li>
       </ul>

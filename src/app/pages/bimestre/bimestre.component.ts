@@ -4,6 +4,7 @@ import {BimestreService} from '../../shared/services/bimestre.service';
 import {MateriaService} from '../../shared/services/materia.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {ActivatedRoute, RouterLinkActive} from '@angular/router';
+import {DocenteFilter} from '../../shared/models/docente';
 
 @Component({
   selector: 'app-bimestre',
@@ -609,7 +610,7 @@ export class BimestreComponent implements OnInit {
     }
 
 
-    this.cursoService.getAllCursos().subscribe(
+    this.cursoService.getAllCursos(new DocenteFilter()).subscribe(
       res => {
         console.log(res);
         this.cursos = res.body;
