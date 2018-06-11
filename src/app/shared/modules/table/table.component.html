@@ -54,6 +54,11 @@
                 <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'editProduct')"></i>
                 <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'deleteProduct')"></i>
               </div>
+              <div *ngIf="col.type === 'actionsView'">
+                <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'edit')"></i>
+                <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')"></i>
+                <i class="fa fa-eye fa-lg" (click)="clickButtonRow(item,col,i,$event,'view')"></i>
+              </div>
               <div *ngIf="col.type === 'userActions'">
                 <button class="btn btn-sm btn-outline-info" (click)="clickButtonRow(item,col,i,$event,'editUser')">
                   <i class="mdi mdi-lead-pencil"></i> Editar

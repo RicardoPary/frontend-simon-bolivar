@@ -25,4 +25,8 @@ export class MateriaService {
   modifyMateria(body: any): Observable<HttpResponse<any>> {
     return this.http.put(`${this.urlResource}`, body, {observe: 'response'});
   }
+
+  getAllMateriasByIdcursoAndIdDocente(idCurso: any, idDocente: any): Observable<HttpResponse<any>> {
+    return this.http.get(`${this.urlResource}/${idCurso}/curso/${idDocente}/docente`, {observe: 'response'});
+  }
 }
