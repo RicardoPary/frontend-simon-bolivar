@@ -1,13 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {LoginRoutingModule} from './login-routing.module';
 import {LoginComponent} from './login.component';
 import {NgbCarouselModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {ActividadCivicaService} from '../shared/services/actividad-civica.service';
 import {ReunionService} from '../shared/services/reunion.service';
-import {FormModule} from '../pages/form/form.module';
-import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {AccountService, AuthStorage, LoginService} from '../shared/auth';
 import {AuthServerProvider} from '../shared/auth/auth-jwt.service';
@@ -18,7 +15,6 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
   imports: [
     CommonModule,
     LoginRoutingModule,
-    FormModule,
     FormsModule,
     NgbCarouselModule.forRoot(),
     NgbModalModule
