@@ -1,365 +1,3 @@
-<!--
-<div [@routerTransition]>
-  &lt;!&ndash; Navigation &ndash;&gt;
-  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Simon Bolivar</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Portafolio</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">Quienes Somos</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contactos</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-
-
-            <div class="dropdown">
-              <button class="dropbtn" (click)="openModal()">Acceder</button>
-              <div style="border: 1px solid #1a252f; z-index: 9999; position: absolute;" *ngIf="viewLogin">
-
-
-
-
-                <form (ngSubmit)="login(form)" #form="ngForm">
-                 <fieldset>
-                   <div class="form-group">
-                     <input type="text"
-                            name="username"
-                            id="username"
-                            class="form-control"
-                            autocomplete="off"
-                            placeholder="Nombre de Usuario"
-                            required minlength="3"
-                            maxlength="50"
-                            #username
-                            ngModel>
-                   </div>
-                   <div class="form-group">
-                     <input type="password"
-                            name="password"
-                            id="password"
-                            class="form-control"
-                            placeholder="Password"
-                            required minlength="4"
-                            maxlength="50"
-                            #password
-                            ngModel>
-                   </div>
-                   <button type="submit" class="btn btn-primary">INGRESAR</button>
-                 </fieldset>
-               </form>
-              </div>
-            </div>
-
-
-
-
-
-
-
-          </li>
-        </ul>
-      </div>
-
-
-
-
-
-
-    </div>
-  </nav>
-
-  &lt;!&ndash; Header &ndash;&gt;
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container">
-      <img class="img-fluid mb-5 d-block mx-auto" src="../../assets/profile.png" alt="">
-      <h1 class="text-uppercase mb-0">Bienvenido</h1>
-      <hr class="star-light">
-      <h2 class="font-weight-light mb-0">Este mes estamos de aniversario</h2>
-    </div>
-
-
-    &lt;!&ndash;<div style="height:700px;">
-    <ngb-carousel>
-      <ng-template ngbSlide *ngFor="let slider of sliders">
-        <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%" height="700px">
-        <div class="carousel-caption">
-          <h3>{{slider.label}}</h3>
-          <p>{{slider.text}}</p>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-    </div>
-&ndash;&gt;
-
-  </header>
-
-
-  <section class="portfolio">
-
-    <div class="container">
-      <div class="row">
-
-
-        <div class="col-xs-12	col-sm-12	col-md-6	col-lg-6">
-
-          <h2>REUNIONES</h2>
-
-          <div style="max-width: 30rem; border: 1px solid #4d5159; height: 200px;" *ngFor="let reunion of reuniones">
-            <div class="card-header" style="background-color: #97b1cc">Fecha {{reunion.fecha}}</div>
-            <div class="card-body">
-              <h5 class="card-title">Lugar {{reunion.lugar}}</h5>
-              <p class="card-text">{{reunion.nombre}}</p>
-            </div>
-          </div>
-
-
-        </div>
-
-
-        <div class="col-xs-12	col-sm-12	col-md-6	col-lg-6">
-
-          <h2>ACTIVIDADES</h2>
-
-          <div style="max-width: 30rem; border: 1px solid #4d5159; height: 200px;" *ngFor="let actividadCivica of actividadesCivicas">
-            <div class="card-header" style="background-color: grey;">Fecha {{actividadCivica.fecha}}</div>
-            <div class="card-body">
-              <h5 class="card-title">Lugar {{actividadCivica.lugar}}</h5>
-              <p class="card-text">{{actividadCivica.nombre}}</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-
-
-
-
-
-  </section>
-
-
-
-
-  &lt;!&ndash; Portfolio Grid Section &ndash;&gt;
-  <section class="portfolio" id="portfolio">
-
-    <div class="container">
-
-
-      <h2 class="text-center text-uppercase text-secondary mb-0">Portafolio</h2>
-      <hr class="star-dark mb-5">
-
-
-      <div class="row">
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-1">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/cabin.png" alt="">
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-2">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/cake.png" alt="">
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-3">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/circus.png" alt="">
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-4">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/game.png" alt="">
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-5">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/safe.png" alt="">
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-6">
-            <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-              <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                <i class="fa fa-search-plus fa-3x"></i>
-              </div>
-            </div>
-            <img class="img-fluid" src="../../assets/portfolio/submarine.png" alt="">
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  &lt;!&ndash; About Section &ndash;&gt;
-  <section class="bg-primary text-white mb-0" id="about">
-    <div class="container">
-      <h2 class="text-center text-uppercase text-white">Quienes Somos</h2>
-      <hr class="star-light mb-5">
-      <div class="row">
-        <div class="col-lg-4 ml-auto">
-          <p class="lead">El colegio simon bolivar tiene mas de 10 años de antiguedad. Al servicio de la educacion en la zona brindando lo mejor en educaion primaria y secundaria.</p>
-        </div>
-        <div class="col-lg-4 mr-auto">
-          <p class="lead">El colegio simon bolivar tiene mas de 10 años de antiguedad. Al servicio de la educacion en la zona brindando lo mejor en educaion primaria y secundaria.</p>
-        </div>
-      </div>
-      <div class="text-center mt-4">
-        <a class="btn btn-xl btn-outline-light" href="#">
-          <i class="fa fa-download mr-2"></i>
-          Download Now!
-        </a>
-      </div>
-    </div>
-  </section>
-
-  &lt;!&ndash; Contact Section &ndash;&gt;
-  <section id="contact">
-    <div class="container">
-      <h2 class="text-center text-uppercase text-secondary mb-0">Contactanos</h2>
-      <hr class="star-dark mb-5">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          &lt;!&ndash; To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. &ndash;&gt;
-          &lt;!&ndash; The form should work on most web servers, but if the form is not working you may need to configure your web server differently. &ndash;&gt;
-          <form name="sentMessage" id="contactForm" novalidate="novalidate">
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Nombre</label>
-                <input class="form-control" id="name" type="text" placeholder="Nombre" required="required" data-validation-required-message="Please enter your name.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Correo Electronico</label>
-                <input class="form-control" id="email" type="email" placeholder="Correo Electronico" required="required" data-validation-required-message="Please enter your email address.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Telefono o Celular</label>
-                <input class="form-control" id="phone" type="tel" placeholder="Telefono o Celular" required="required" data-validation-required-message="Please enter your phone number.">
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                <label>Mensaje</label>
-                <textarea class="form-control" id="message" rows="5" placeholder="Mensaje" required="required" data-validation-required-message="Please enter a message."></textarea>
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
-            <br>
-            <div id="success"></div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Enviar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  &lt;!&ndash; Footer &ndash;&gt;
-  <footer class="footer text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Ubicacion</h4>
-          <p class="lead mb-0">2215 Avenida Julio Cesar Valdez
-            <br>Calle, Nº 65243</p>
-        </div>
-        <div class="col-md-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Alrededor de la Web</h4>
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                <i class="fa fa-fw fa-facebook"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                <i class="fa fa-fw fa-google-plus"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                <i class="fa fa-fw fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                <i class="fa fa-fw fa-linkedin"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                <i class="fa fa-fw fa-dribbble"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h4 class="text-uppercase mb-4">Acerca de Nosotros</h4>
-          <p class="lead mb-0">La plataforma Simon Bolivar fue creado para facilitar la administracion.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <div class="copyright py-4 text-center text-white">
-    <div class="container">
-      <small>Copyright &copy; Simon Bolivar 2018</small>
-    </div>
-  </div>
-
-  &lt;!&ndash; Scroll to Top Button (Only visible on small and extra-small screen sizes) &ndash;&gt;
-  <div class="scroll-to-top d-lg-none position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
-      <i class="fa fa-chevron-up"></i>
-    </a>
-  </div>
-</div>
--->
-
-
 <div id="wrap">
   <div>
     <img src="../../assets/images/logo.png" alt="" title="" border="1" width="130" height="130" style="float: left;"/>
@@ -373,10 +11,7 @@
   <div id="main_container" style="margin-top: 120px;">
 
 
-
-
-
-    <div id="header"  style="background-color: #292f6d;">
+    <div id="header" style="background-color: #292f6d;">
       <div id="logo"></div>
 
       <a href="make-a-donation.html" class="make_donation"></a>
@@ -384,7 +19,8 @@
 
       <div id="menu">
         <ul style="margin-right: 40px;">
-          <li style="background-color: green;"><a href="javascript:void()" title="" (click)="openModal()" routerLinkActive="current">Iniciar</a></li>
+          <li style="background-color: green;"><a href="javascript:void()" title="" (click)="openModal()"
+                                                  routerLinkActive="current">Iniciar</a></li>
 
 
         </ul>
@@ -405,7 +41,8 @@
                 <div class="col-md-12">
                   <ngb-carousel>
                     <ng-template ngbSlide *ngFor="let slider of sliders">
-                      <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%" height="300px;">
+                      <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide"
+                           width="100%" height="300px;">
                       <div class="carousel-caption">
                         <h3>{{slider.label}}</h3>
                         <p>{{slider.text}}</p>
@@ -421,7 +58,6 @@
         </div>
         <!-- end: sliding featured banner -->
       </div>
-
 
 
     </div><!---------------------------------end of middle banner-------------------------------->
@@ -498,7 +134,7 @@
         </div>
 
 
-       <div class="clear"></div>
+        <div class="clear"></div>
       </div>
 
 
@@ -569,39 +205,7 @@
         </div>
 
 
-
-
-
-
-
       </div>
-
-      <!--<div class="home_section_left col-3">-->
-        <!--<img src="images/icon3.gif" alt="" title="" class="home_section_icon" border="0">-->
-
-        <!--<h2 class="home_title">Informacion</h2>-->
-        <!--<div class="home_subtitle">Detalles del colegio</div>-->
-
-        <!--<div class="home_section_thumb">-->
-        <!--</div>-->
-        <!--<p>-->
-          <!--La Unidad Educativa “SIMÓN BOLÍVAR ”, se encuentra ubicada en El Alto en la zona Villa-->
-          <!--Mercedes Anexo en la cuarta sección, fue fundada el 20 de enero del año 2000 en la actualidad-->
-          <!--la unidad educativa cuenta con resolución administrativa 1051/01 que autoriza el-->
-          <!--funcionamiento de los dos niveles educativos NRO 233/2007 con RUE Nro.026052 y Código-->
-          <!--SIE 70620076.-->
-        <!--</p>-->
-        <!--<a href="" class="more"><img src="images/more.gif" alt="" title="" border="0"></a>-->
-        <!--<div class="clear"></div>-->
-      <!--</div>-->
-
-
-
-
-
-
-
-
 
 
       <div class="clear"></div>
@@ -611,24 +215,26 @@
       <div class="container">
         <div class="row" style="padding: 10px;">
           <div class="col-md-4 mb-5 mb-lg-0">
-            <h6 >Ubicacion</h6>
+            <h6>Ubicacion</h6>
             <p class="lead mb-0" style="font-size: 14px;">se encuentra ubicada en El Alto en la zona Villa
               Mercedes Anexo en la cuarta sección.</p>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">
             <h6>Mision</h6>
-            <p class="lead mb-0" style="font-size: 14px;"><p class="lead mb-0" style="font-size: 14px;">
-            Potenciar las capacidades critico
-            reflexivas, creativas, participativas y productivas, fortaleciendo los valores y
-            actitudes de la comunidad a través de una educación con propuestas innovadoras,
-            promoviendo el consumo de alimentos saludables para vivir bien.</p>
+            <p class="lead mb-0" style="font-size: 14px;">
+            <p class="lead mb-0" style="font-size: 14px;">
+              Potenciar las capacidades critico
+              reflexivas, creativas, participativas y productivas, fortaleciendo los valores y
+              actitudes de la comunidad a través de una educación con propuestas innovadoras,
+              promoviendo el consumo de alimentos saludables para vivir bien.</p>
           </div>
           <div class="col-md-4">
-            <h6 >Vision</h6>
-            <p class="lead mb-0" style="font-size: 14px;">Ser una unidad educativa referente en continuo crecimiento en la formación
-            integral de los estudiantes, rescatando nuestros valores y saberes locales, para
-            coadyuvar a la solución de problemas, a fin de mejorar la calidad de vida en la
-            comunidad.</p>
+            <h6>Vision</h6>
+            <p class="lead mb-0" style="font-size: 14px;">Ser una unidad educativa referente en continuo crecimiento en
+              la formación
+              integral de los estudiantes, rescatando nuestros valores y saberes locales, para
+              coadyuvar a la solución de problemas, a fin de mejorar la calidad de vida en la
+              comunidad.</p>
           </div>
         </div>
       </div>
@@ -637,13 +243,3 @@
 
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
