@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PersonaService} from '../../shared/services/persona.service';
-import {DocenteService} from '../../shared/services/docente.service.';
 import {DocenteFilter} from '../../shared/models/docente';
 import {TutorService} from '../../shared/services/tutor.service';
+import {TutorFilter} from '../../shared/models/tutor';
 
 @Component({
   selector: 'app-tutor',
@@ -118,7 +118,7 @@ export class TutorComponent implements OnInit {
               private tutorService: TutorService,
               private personaService: PersonaService) {
 
-    this.tutorService.currentDocenteFilter().subscribe(
+    this.tutorService.currentTutorFilter().subscribe(
       dates => {
         this.pageSize = dates.size;
         this.page = dates.page;
@@ -131,9 +131,8 @@ export class TutorComponent implements OnInit {
   ngOnInit() {
   }
 
-  callService(docenteFilter: DocenteFilter) {
-    this.tutorService.getAllDocentes(docenteFilter).subscribe(res => {
-      console.log(res.body);
+  callService(tutorFilter: TutorFilter) {
+    this.tutorService.getAllTutores(tutorFilter).subscribe(res => {
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
@@ -144,8 +143,6 @@ export class TutorComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    console.log(form);
-
     this.personaService.createPersona({
       'ci': form.value.ci,
       'nombre': form.value.nombre,
@@ -158,44 +155,35 @@ export class TutorComponent implements OnInit {
       'telefono': parseFloat(form.value.telefono)
     }).subscribe(
       res => {
-        console.log(res);
-
-        this.tutorService.createDocente({
+        this.tutorService.createTutor({
           'idEstudiante': 2,
           'parentesco': form.value.parentesco,
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
-            this.tutorService.sendDocenteFilter(new DocenteFilter());
-            this.tutorService.sendDocenteFilter(new DocenteFilter());
+            this.tutorService.sendTutorFilter(new DocenteFilter());
+            this.tutorService.sendTutorFilter(new DocenteFilter());
             this.modal.close();
-            console.log(res2);
           }
         );
-
-
       }
     );
-
-
   }
 
   closeModal() {
     this.modal.close();
   }
 
-
   clickPagination(event: any) {
-    const filter = this.tutorService.getDocenteFilter();
+    const filter = this.tutorService.getTutorFilter();
     filter.page = (event.newPage) - 1;
-    this.tutorService.sendDocenteFilter(filter);
+    this.tutorService.sendTutorFilter(filter);
   }
 
   clickSort(event: any) {
     const state = event.isDesc ? 'desc' : 'asc';
-    const filter = this.tutorService.getDocenteFilter();
+    const filter = this.tutorService.getTutorFilter();
     filter.sort = [event.column + ',' + state];
-    this.tutorService.sendDocenteFilter(filter);
+    this.tutorService.sendTutorFilter(filter);
   }
-
 }

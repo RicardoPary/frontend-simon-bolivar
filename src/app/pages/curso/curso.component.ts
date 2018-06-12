@@ -4,6 +4,7 @@ import {DocenteFilter} from '../../shared/models/docente';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {CursoService} from '../../shared/services/curso.service';
 import {Router} from '@angular/router';
+import {CursoFilter} from '../../shared/models/curso';
 
 @Component({
   selector: 'app-curso',
@@ -78,9 +79,8 @@ export class CursoComponent implements OnInit {
   ngOnInit() {
   }
 
-  callService(docenteFilter: DocenteFilter) {
-    this.cursoService.getAllCursos(docenteFilter).subscribe(res => {
-      console.log(res.body);
+  callService(cursoFilter: CursoFilter) {
+    this.cursoService.getAllCursos(cursoFilter).subscribe(res => {
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
@@ -91,24 +91,18 @@ export class CursoComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    console.log(form);
-
-    this.actividadCivicaService.postAct5ividadCivica({
+    this.actividadCivicaService.modifyActividadCivica({
       'cronograma': form.value.cronograma,
       'descripcion': form.value.descripcion,
       'fecha': form.value.fecha,
       'nombre': form.value.nombre
     }).subscribe(
       res => {
-        console.log(res);
-        this.actividadCivicaService.sendDocenteFilter(new DocenteFilter());
-        this.actividadCivicaService.sendDocenteFilter(new DocenteFilter());
+        this.actividadCivicaService.sendActividadCivicaFilter(new DocenteFilter());
+        this.actividadCivicaService.sendActividadCivicaFilter(new DocenteFilter());
         this.modal.close();
-
       }
     );
-
-
   }
 
   closeModal() {
@@ -116,15 +110,10 @@ export class CursoComponent implements OnInit {
   }
 
   clickButtonRow(event) {
-    console.log(event);
-
     if (event.description === 'view') {
-      console.log('vvv');
       this.router.navigate(['/bimestre', event.item.id, 2]);
     }
-
   }
-
 
   clickPagination(event: any) {
     const filter = this.cursoService.getCursoFilter();

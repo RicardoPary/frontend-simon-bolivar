@@ -22,16 +22,12 @@ export class LoginModalComponent implements OnInit {
   }
 
   login (form) {
-    console.log(form);
     this.loginService.login ({
       username: form.value.username,
       password: form.value.password,
       rememberMe: false
     }).then (() => {
-      console.log('entro');
-
       this.activeModal.close();
-
       this.router.navigate (['/dashboard']);
     }).catch ((e) => console.log(e));
   }

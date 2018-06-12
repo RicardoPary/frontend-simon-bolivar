@@ -7,6 +7,7 @@ import {LoginService} from '../shared/auth';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginModalComponent} from './login-modal/login-modal.component';
 import {DocenteFilter} from '../shared/models/docente';
+import {ReunionFilter} from '../shared/models/reunion';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,9 @@ import {DocenteFilter} from '../shared/models/docente';
 export class LoginComponent implements OnInit {
 
   public sliders: Array<any> = [];
-
   viewLogin = false;
-
   password: string;
   username: string;
-
-
   reuniones: any = [];
   actividadesCivicas: any = [];
 
@@ -55,16 +52,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.actividadCivicaService.getAllDocentes(new DocenteFilter()).subscribe(
+    this.actividadCivicaService.getAllActividadesCivicas(new DocenteFilter()).subscribe(
       res => {
-        console.log(res);
         this.actividadesCivicas = res.body;
       }
     );
 
-    this.reunionService.getAllDocentes(new DocenteFilter()).subscribe(
+    this.reunionService.getAllReuniones(new ReunionFilter).subscribe(
       res => {
-        console.log(res);
         this.reuniones = res.body;
       }
     );
@@ -77,7 +72,6 @@ export class LoginComponent implements OnInit {
 
 
   login (form) {
-    console.log(form);
     this.loginService.login ({
       username: form.value.username,
       password: form.value.password,

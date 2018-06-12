@@ -1,36 +1,36 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/index';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
 import {BehaviorSubject} from 'rxjs/index';
 import {DocenteFilter} from '../models/docente';
 import {createRequestOption} from '../models/extras/request-util';
+import {ReunionFilter} from '../models/reunion';
 
 @Injectable()
 export class ReunionService {
   private urlResource = 'api/reunions';
-  private docenteFilter = new BehaviorSubject<any>(new DocenteFilter);
+  private reunionFilter = new BehaviorSubject<any>(new ReunionFilter);
 
   constructor(protected http: HttpClient) {
   }
 
-  sendDocenteFilter(object: any) {
-    this.docenteFilter.next(object);
+  sendReunionFilter(object: any) {
+    this.reunionFilter.next(object);
   }
 
-  currentDocenteFilter(): Observable<any> {
-    return this.docenteFilter.asObservable();
+  currentReunionFilter(): Observable<any> {
+    return this.reunionFilter.asObservable();
   }
 
-  getDocenteFilter() {
-    return this.docenteFilter.getValue();
+  getReunionFilter() {
+    return this.reunionFilter.getValue();
   }
 
-  getAllDocentes(docenteFilter: DocenteFilter): Observable<HttpResponse<any>> {
+  getAllReuniones(reunionFilter: ReunionFilter): Observable<HttpResponse<any>> {
     const params = createRequestOption({
-      'page': docenteFilter.page,
-      'size': docenteFilter.size,
-      'sort': docenteFilter.sort
+      'page': reunionFilter.page,
+      'size': reunionFilter.size,
+      'sort': reunionFilter.sort
     });
     return this.http.get(`${this.urlResource}`, {params: params, observe: 'response'});
   }

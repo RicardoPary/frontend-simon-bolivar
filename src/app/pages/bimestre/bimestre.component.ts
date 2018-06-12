@@ -3,8 +3,9 @@ import {Bimiestre} from './bimestre';
 import {BimestreService} from '../../shared/services/bimestre.service';
 import {MateriaService} from '../../shared/services/materia.service';
 import {CursoService} from '../../shared/services/curso.service';
-import {ActivatedRoute, RouterLinkActive} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {DocenteFilter} from '../../shared/models/docente';
+import {CursoFilter} from '../../shared/models/curso';
 
 @Component({
   selector: 'app-bimestre',
@@ -610,16 +611,14 @@ export class BimestreComponent implements OnInit {
     }
 
 
-    this.cursoService.getAllCursos(new DocenteFilter()).subscribe(
+    this.cursoService.getAllCursos(new CursoFilter).subscribe(
       res => {
-        console.log(res);
         this.cursos = res.body;
       }
     );
 
     this.materiaService.getAllMaterias().subscribe(
       res => {
-        console.log(res);
         this.materias = res.body;
       }
     );
@@ -682,5 +681,4 @@ export class BimestreComponent implements OnInit {
   getPromedio(nota1, nota2, nota3, nota4, nota5, nota6) {
     return (parseFloat(nota1) + parseFloat(nota2) + parseFloat(nota3) + parseFloat(nota4) + parseFloat(nota5) + parseFloat(nota6)) / 6;
   }
-
 }

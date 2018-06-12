@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {DocenteFilter} from '../../shared/models/docente';
 import {ReunionService} from '../../shared/services/reunion.service';
+import {ReunionFilter} from '../../shared/models/reunion';
 
 @Component({
   selector: 'app-reunion',
@@ -97,22 +98,20 @@ export class ReunionComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private reunionService: ReunionService) {
 
-    this.reunionService.currentDocenteFilter().subscribe(
+    this.reunionService.currentReunionFilter().subscribe(
       dates => {
         this.pageSize = dates.size;
         this.page = dates.page;
         this.callService(dates);
       }
     );
-
   }
 
   ngOnInit() {
   }
 
-  callService(docenteFilter: DocenteFilter) {
-    this.reunionService.getAllDocentes(docenteFilter).subscribe(res => {
-      console.log(res.body);
+  callService(reunionFilter: ReunionFilter) {
+    this.reunionService.getAllReuniones(reunionFilter).subscribe(res => {
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
@@ -123,8 +122,6 @@ export class ReunionComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    console.log(form);
-
     this.reunionService.postReunion({
       'descripcion': form.value.descripcion,
       'detalle': form.value.detalle,
@@ -135,32 +132,27 @@ export class ReunionComponent implements OnInit {
       'ordenDia': form.value.ordenDia
     }).subscribe(
       res => {
-        this.reunionService.sendDocenteFilter(new DocenteFilter());
-        this.reunionService.sendDocenteFilter(new DocenteFilter());
+        this.reunionService.sendReunionFilter(new DocenteFilter());
+        this.reunionService.sendReunionFilter(new DocenteFilter());
         this.modal.close();
-        console.log(res);
       }
     );
-
-
   }
 
   closeModal() {
     this.modal.close();
   }
 
-
   clickPagination(event: any) {
-    const filter = this.reunionService.getDocenteFilter();
+    const filter = this.reunionService.getReunionFilter();
     filter.page = (event.newPage) - 1;
-    this.reunionService.sendDocenteFilter(filter);
+    this.reunionService.sendReunionFilter(filter);
   }
 
   clickSort(event: any) {
     const state = event.isDesc ? 'desc' : 'asc';
-    const filter = this.reunionService.getDocenteFilter();
+    const filter = this.reunionService.getReunionFilter();
     filter.sort = [event.column + ',' + state];
-    this.reunionService.sendDocenteFilter(filter);
+    this.reunionService.sendReunionFilter(filter);
   }
-
 }

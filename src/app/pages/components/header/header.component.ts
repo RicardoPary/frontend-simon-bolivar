@@ -32,7 +32,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.cuentaService.getCuenta().subscribe(res => {
-      console.log(res);
       this.cuenta = res.body;
     });
 

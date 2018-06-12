@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PersonaService} from '../../shared/services/persona.service';
-import {DocenteService} from '../../shared/services/docente.service.';
 import {DocenteFilter} from '../../shared/models/docente';
 import {PlantelAdministrativoService} from '../../shared/services/plantel-administrativo.service';
 
@@ -109,7 +108,7 @@ export class PlantelAdministrativoComponent implements OnInit {
               private plantelAdministrativoService: PlantelAdministrativoService,
               private personaService: PersonaService) {
 
-    this.plantelAdministrativoService.currentDocenteFilter().subscribe(
+    this.plantelAdministrativoService.currentPlantelAdministrativoFilter().subscribe(
       dates => {
         this.pageSize = dates.size;
         this.page = dates.page;
@@ -123,8 +122,7 @@ export class PlantelAdministrativoComponent implements OnInit {
   }
 
   callService(docenteFilter: DocenteFilter) {
-    this.plantelAdministrativoService.getAllDocentes(docenteFilter).subscribe(res => {
-      console.log(res.body);
+    this.plantelAdministrativoService.getAllPlantelAdministrativos(docenteFilter).subscribe(res => {
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
@@ -135,8 +133,6 @@ export class PlantelAdministrativoComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    console.log(form);
-
     this.personaService.createPersona({
       'ci': form.value.ci,
       'nombre': form.value.nombre,
@@ -149,44 +145,35 @@ export class PlantelAdministrativoComponent implements OnInit {
       'telefono': parseFloat(form.value.telefono)
     }).subscribe(
       res => {
-        console.log(res);
-
-        this.plantelAdministrativoService.createDocente({
+        this.plantelAdministrativoService.createPlantelAdministrativo({
           'cargo': 'docente',
           'idTrabajador': 12,
           'idPersona': res.body.id
         }).subscribe(
           res2 => {
-            this.plantelAdministrativoService.sendDocenteFilter(new DocenteFilter());
-            this.plantelAdministrativoService.sendDocenteFilter(new DocenteFilter());
+            this.plantelAdministrativoService.sendPlantelAdministrativoFilter(new DocenteFilter());
+            this.plantelAdministrativoService.sendPlantelAdministrativoFilter(new DocenteFilter());
             this.modal.close();
-            console.log(res2);
           }
         );
-
-
       }
     );
-
-
   }
 
   closeModal() {
     this.modal.close();
   }
 
-
   clickPagination(event: any) {
-    const filter = this.plantelAdministrativoService.getDocenteFilter();
+    const filter = this.plantelAdministrativoService.getPlantelAdministrativoFilter();
     filter.page = (event.newPage) - 1;
-    this.plantelAdministrativoService.sendDocenteFilter(filter);
+    this.plantelAdministrativoService.sendPlantelAdministrativoFilter(filter);
   }
 
   clickSort(event: any) {
     const state = event.isDesc ? 'desc' : 'asc';
-    const filter = this.plantelAdministrativoService.getDocenteFilter();
+    const filter = this.plantelAdministrativoService.getPlantelAdministrativoFilter();
     filter.sort = [event.column + ',' + state];
-    this.plantelAdministrativoService.sendDocenteFilter(filter);
+    this.plantelAdministrativoService.sendPlantelAdministrativoFilter(filter);
   }
-
 }

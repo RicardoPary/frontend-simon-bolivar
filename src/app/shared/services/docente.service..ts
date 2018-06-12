@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/index';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/index';
-import {EstudianteFilter} from '../models/estudiante';
 import {createRequestOption} from '../models/extras/request-util';
 import {DocenteFilter} from '../models/docente';
 

@@ -128,7 +128,6 @@ export class DocenteComponent implements OnInit {
 
   callService(docenteFilter: DocenteFilter) {
     this.subscriptionTable = this.docenteService.getAllDocentes(docenteFilter).subscribe(res => {
-      console.log(res.body);
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
@@ -139,8 +138,6 @@ export class DocenteComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    console.log(form);
-
     this.personaService.createPersona({
       'ci': form.value.ci,
       'nombre': form.value.nombre,
@@ -153,8 +150,6 @@ export class DocenteComponent implements OnInit {
       'telefono': parseFloat(form.value.telefono)
     }).subscribe(
       res => {
-        console.log(res);
-
         this.docenteService.createDocente({
           'grado': form.value.grado,
           'idTrabajador': 0,
@@ -164,7 +159,6 @@ export class DocenteComponent implements OnInit {
             this.docenteService.sendDocenteFilter(new DocenteFilter());
             this.docenteService.sendDocenteFilter(new DocenteFilter());
             this.modal.close();
-            console.log(res2);
           }
         );
 
