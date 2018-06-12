@@ -1,17 +1,37 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/index';
+import {BehaviorSubject, Observable} from 'rxjs/index';
 import {HttpClient, HttpResponse} from '@angular/common/http';
+import {MateriaFilter} from '../models/materia';
+import {createRequestOption} from '../models/extras/request-util';
 
 @Injectable()
 export class MateriaService {
 
   private urlResource = 'api/materias';
+  private materiaFilter = new BehaviorSubject<any>(new MateriaFilter);
 
   constructor(protected http: HttpClient) {
   }
 
-  getAllMaterias(): Observable<HttpResponse<any>> {
-    return this.http.get(`${this.urlResource}`, {observe: 'response'});
+  sendMateriaFilter(object: any) {
+    this.materiaFilter.next(object);
+  }
+
+  currentMateriaFilter(): Observable<any> {
+    return this.materiaFilter.asObservable();
+  }
+
+  getMateriaFilter() {
+    return this.materiaFilter.getValue();
+  }
+
+  getAllMaterias(materiaFilter: MateriaFilter): Observable<HttpResponse<any>> {
+    const params = createRequestOption({
+      'page': materiaFilter.page,
+      'size': materiaFilter.size,
+      'sort': materiaFilter.sort
+    });
+    return this.http.get(`${this.urlResource}`, {params: params, observe: 'response'});
   }
 
   createMateria(body: any): Observable<HttpResponse<any>> {

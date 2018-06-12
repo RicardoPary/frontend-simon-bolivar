@@ -4,8 +4,8 @@ import {BimestreService} from '../../shared/services/bimestre.service';
 import {MateriaService} from '../../shared/services/materia.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {ActivatedRoute} from '@angular/router';
-import {DocenteFilter} from '../../shared/models/docente';
 import {CursoFilter} from '../../shared/models/curso';
+import {MateriaFilter} from '../../shared/models/materia';
 
 @Component({
   selector: 'app-bimestre',
@@ -617,7 +617,7 @@ export class BimestreComponent implements OnInit {
       }
     );
 
-    this.materiaService.getAllMaterias().subscribe(
+    this.materiaService.getAllMaterias(new MateriaFilter).subscribe(
       res => {
         this.materias = res.body;
       }
