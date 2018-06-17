@@ -1,4 +1,4 @@
-export class Bimiestre {
+export class Bimestre {
   apellidosNombres = '';
   autoevaluacionDecir = 0;
   autoevaluacionSer = 0;

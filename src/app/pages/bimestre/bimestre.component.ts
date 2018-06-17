@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Bimiestre} from './bimestre';
 import {BimestreService} from '../../shared/services/bimestre.service';
 import {MateriaService} from '../../shared/services/materia.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {ActivatedRoute} from '@angular/router';
-import {CursoFilter} from '../../shared/models/curso';
-import {MateriaFilter} from '../../shared/models/materia';
+import {Bimestre} from './bimestre';
+import {BimestreFilter} from '../../shared/models/bimestre';
+import {Subscription} from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-bimestre',
@@ -14,662 +14,85 @@ import {MateriaFilter} from '../../shared/models/materia';
 })
 export class BimestreComponent implements OnInit {
 
-  bimestres: Bimiestre [] = [];
-  cursos: any = [];
+  subscriptionBimestreService: Subscription = new Subscription();
+
   materias: any = [];
 
+  bimestres: any = [];
+  filtersColumns: any;
+  totalBimestres: number;
+  pageSize: number;
+  page: number;
+
+  bimestreValue: any;
+  materiaValue: any;
+  gestionValue: any;
+
   constructor(private bimestreService: BimestreService,
-              private materiaService: MateriaService,
               private cursoService: CursoService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private materiaService: MateriaService) {
+
+    this.bimestreService.currentBimestreFilter().subscribe(
+      dates => {
+        this.pageSize = dates.size;
+        this.page = dates.page;
+        this.bimestreValue = dates.bimestre.bimestre;
+        this.materiaValue = dates.bimestre.idMateria;
+        this.gestionValue = dates.bimestre.gestion;
+        this.callService(dates);
+      }
+    );
+
   }
 
   ngOnInit() {
 
-    if (parseFloat(this.route.snapshot.params['idCurso']) === 1) {
-      this.bimestres = [
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        }
-      ];
-    }
-
-    if (parseFloat(this.route.snapshot.params['idCurso']) === 2) {
-      this.bimestres = [
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        },
-        {
-          'apellidosNombres': 'guarachi apaza wilson',
-          'autoevaluacionDecir': 0,
-          'autoevaluacionSer': 0,
-          'bimestre': '1',
-          'decirPromedio': 0,
-          'hacerPromedio': 0,
-          'idDocente': 1,
-          'idEstudiante': 1,
-          'idMateria': 1,
-          'indicadorCualitativo': '12',
-          'notaBimestralFinal': 12,
-          'notaDecir1': 0,
-          'notaDecir2': 0,
-          'notaDecir3': 0,
-          'notaDecir4': 0,
-          'notaDecir5': 0,
-          'notaDecir6': 0,
-          'notaHacer1': 0,
-          'notaHacer2': 0,
-          'notaHacer3': 0,
-          'notaHacer4': 0,
-          'notaHacer5': 0,
-          'notaHacer6': 0,
-          'notaSaber1': 0,
-          'notaSaber2': 0,
-          'notaSaber3': 0,
-          'notaSaber4': 0,
-          'notaSaber5': 0,
-          'notaSaber6': 0,
-          'notaSer1': 0,
-          'notaSer2': 0,
-          'notaSer3': 0,
-          'notaSer4': 0,
-          'notaSer5': 0,
-          'notaSer6': 0,
-          'observacion': 'aprobado',
-          'promedioAutoevaluacion': 12,
-          'saberPromedio': 13,
-          'serPromedio': 13
-        }
-      ];
-    }
-
-
-    this.cursoService.getAllCursos(new CursoFilter).subscribe(
-      res => {
-        this.cursos = res.body;
-      }
+    this.materiaService.getAllMateriasByIdCurso(this.route.snapshot.params['idCurso']).subscribe(
+      res => this.materias = res.body
     );
 
-    this.materiaService.getAllMaterias(new MateriaFilter).subscribe(
-      res => {
-        this.materias = res.body;
-      }
-    );
+  }
+
+  callService(bimestreFilter: BimestreFilter) {
+    this.subscriptionBimestreService = this.bimestreService.getAllBimestresByFilter(bimestreFilter).subscribe(res => {
+      console.log(res);
+      this.totalBimestres = parseFloat(res.headers.get('X-Total-Count'));
+      this.bimestres = res.body;
+    });
+  }
+
+  submitBimestre(value) {
+    console.log(value);
+    const filter = this.bimestreService.getBimestreFilter();
+    filter.bimestre.bimestre = value;
+    filter.page = 0;
+    this.bimestreService.sendBimestreFilter(filter);
+    this.page = 0;
+  }
+
+  submitMateria(value) {
+    console.log(value);
+    const filter = this.bimestreService.getBimestreFilter();
+    filter.bimestre.idMateria = value;
+    filter.page = 0;
+    this.bimestreService.sendBimestreFilter(filter);
+    this.page = 0;
+  }
+
+  submitGestion(value) {
+    console.log(value);
+    const filter = this.bimestreService.getBimestreFilter();
+    filter.bimestre.gestion = value;
+    filter.page = 0;
+    this.bimestreService.sendBimestreFilter(filter);
+    this.page = 0;
   }
 
   saveBimestre() {
-
     this.bimestres.map(
       item => {
-        this.bimestreService.createBimestre(
-          {
-            'autoevaluacionDecir': item.autoevaluacionDecir,
-            'autoevaluacionSer': item.autoevaluacionSer,
-            'bimestre': item.bimestre,
-            'decirPromedio': item.decirPromedio,
-            'hacerPromedio': item.hacerPromedio,
-            'idDocente': item.idDocente,
-            'idEstudiante': item.idEstudiante,
-            'idMateria': item.idMateria,
-            'indicadorCualitativo': item.indicadorCualitativo,
-            'notaBimestralFinal': item.notaBimestralFinal,
-            'notaDecir1': item.notaDecir1,
-            'notaDecir2': item.notaDecir2,
-            'notaDecir3': item.notaDecir3,
-            'notaDecir4': item.notaDecir4,
-            'notaDecir5': item.notaDecir5,
-            'notaDecir6': item.notaDecir6,
-            'notaHacer1': item.notaHacer1,
-            'notaHacer2': item.notaHacer2,
-            'notaHacer3': item.notaHacer3,
-            'notaHacer4': item.notaHacer4,
-            'notaHacer5': item.notaHacer5,
-            'notaHacer6': item.notaHacer6,
-            'notaSaber1': item.notaSaber1,
-            'notaSaber2': item.notaSaber2,
-            'notaSaber3': item.notaSaber3,
-            'notaSaber4': item.notaSaber4,
-            'notaSaber5': item.notaSaber5,
-            'notaSaber6': item.notaSaber6,
-            'notaSer1': item.notaSer1,
-            'notaSer2': item.notaSer2,
-            'notaSer3': item.notaSer3,
-            'notaSer4': item.notaSer4,
-            'notaSer5': item.notaSer5,
-            'notaSer6': item.notaSer6,
-            'observacion': item.observacion,
-            'promedioAutoevaluacion': item.promedioAutoevaluacion,
-            'saberPromedio': item.saberPromedio,
-            'serPromedio': item.serPromedio
-          }
-        ).subscribe(
+        this.bimestreService.modifyBimestre(item).subscribe(
           res => {
             console.log(res);
           }

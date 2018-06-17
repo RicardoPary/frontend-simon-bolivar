@@ -46,6 +46,10 @@ export class MateriaService {
     return this.http.put(`${this.urlResource}`, body, {observe: 'response'});
   }
 
+  getAllMateriasByIdCurso(idCurso: any): Observable<HttpResponse<any>> {
+    return this.http.get(`${this.urlResource}/${idCurso}/curso`, {observe: 'response'});
+  }
+
   getAllMateriasByIdcursoAndIdDocente(idCurso: any, idDocente: any): Observable<HttpResponse<any>> {
     return this.http.get(`${this.urlResource}/${idCurso}/curso/${idDocente}/docente`, {observe: 'response'});
   }

@@ -1,29 +1,5 @@
 <button routerLink="/curso" style="border: none; background: none; font-size: 30px;"><i class="fa fa-arrow-circle-left fa-lg"></i></button>
-
-<button (click)="saveBimestre()" class="btn btn-primary">Guardar</button>
 <br>
-<br>
-
-<div class="row">
-
-  <div class="form-group" class="col-3">
-    <label for="curso">Cursos</label>
-    <select class="form-control" id="curso">
-      <option [value]="curso.nombre" *ngFor="let curso of cursos">{{curso.nombre}}</option>
-    </select>
-  </div>
-
-  <div class="form-group" class="col-3">
-    <label for="materia">Cursos</label>
-    <select class="form-control" id="materia">
-      <option [value]="materia.nombre" *ngFor="let materia of materias">{{materia.nombre}}</option>
-    </select>
-  </div>
-
-</div>
-
-<br>
-
 
 <table width="100%" border="1" style="border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
 
@@ -39,9 +15,25 @@
   </tr>
   <tr>
     <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">DOCENTE :</div></td>
-    <td style="width: 500px;">S</td>
+    <td>R</td>
     <td style="width: 200px;"><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">GESTION :</div></td>
-    <td>2018 </td>
+    <td><select class="mdb-select"
+                id="gestion"
+                (change)="submitGestion(gestion.value)"
+                #gestion="ngModel"
+                [(ngModel)]="gestionValue">
+      <option value="2020">2020</option>
+      <option value="2019">2019</option>
+      <option value="2018">2018</option>
+      <option value="2017">2017</option>
+      <option value="2016">2016</option>
+      <option value="2015">2015</option>
+      <option value="2014">2014</option>
+      <option value="2013">2013</option>
+      <option value="2012">2012</option>
+      <option value="2011">2011</option>
+      <option value="2010">2010</option>
+    </select></td>
   </tr>
   <tr>
     <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">AREA :</div></td>
@@ -50,8 +42,29 @@
     <td>S</td>
   </tr>
   <tr>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">MATERIA :</div></td>
+    <td><select class="mdb-select"
+                id="materia"
+                (change)="submitMateria(materia.value)"
+                #materia="ngModel"
+                [(ngModel)]="materiaValue">
+      <option [value]="materia.id" *ngFor="let materia of materias">{{materia.nombre}}</option>
+    </select></td>
+    <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">ACCIONES :</div></td>
+    <i class="fa fa-save fa-2x" (click)="saveBimestre()" style="cursor: pointer;"></i>
+  </tr>
+  <tr>
     <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">BIMESTRE :</div></td>
-    <td>1er Bimestre</td>
+    <td><select class="mdb-select"
+                id="bimestre"
+                (change)="submitBimestre(bimestre.value)"
+                #bimestre="ngModel"
+                [(ngModel)]="bimestreValue">
+      <option value="1">1er Bimestre</option>
+      <option value="2">2er Bimestre</option>
+      <option value="3">3er Bimestre</option>
+      <option value="4">4er Bimestre</option>
+    </select></td>
     <td><div style="font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif;">CURSO :</div></td>
     <td>S</td>
   </tr>
@@ -60,6 +73,8 @@
 
 <br>
 
+
+<div [ngBusy]="{busy: subscriptionBimestreService, message: 'Cargando...'}">
 <table border="1" style="border: 2px solid black; font-family: Arial, Helvetica, sans-serif; font-size: 10px;">
   <tbody>
   <tr style="border: 2px solid black;">
@@ -113,7 +128,7 @@
   </tr>
   <tr style="height: 20px;" *ngFor="let bimestre of bimestres, let i = index">
     <td style="border-left: 2px solid black; border-right: 2px solid black; ">{{i + 1}}</td>
-    <td style="border-right: 2px solid black;">{{bimestre.apellidosNombres}}</td>
+    <td style="border-right: 2px solid black;">{{bimestre.estudiante.paterno + ' ' + bimestre.estudiante.materno + ' ' +bimestre.estudiante.nombre }}</td>
     <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer1"></td>
     <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer2"></td>
     <td><input type="text" style="width: 20px; border: none;" [(ngModel)]="bimestre.notaSer3"></td>
@@ -151,5 +166,5 @@
   </tr>
   </tbody>
 </table>
-
+</div>
 

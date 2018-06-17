@@ -22,18 +22,19 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/pwa": "^0.6.8",
     "@angular/router": "^6.0.3",
+    "@angular/service-worker": "^6.0.3",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
+    "ng-busy": "^6.0.0-rc0",
     "ng2-charts": "^1.6.0",
     "ngx-webstorage": "^2.0.1",
     "popper": "^1.0.1",
     "rxjs": "^6.0.0",
     "underscore": "latest",
-    "zone.js": "^0.8.26",
-    "@angular/service-worker": "^6.0.3"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^6.0.3",

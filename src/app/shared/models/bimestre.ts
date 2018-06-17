@@ -1,5 +1,10 @@
 export class Bimestre {
-  name: String;
+  name = '';
+  bimestre = '1';
+  gestion = 2018;
+  idDocente = null;
+  idEstudiante = null;
+  idMateria = 1;
 }
 
 export class BimestreFilter {

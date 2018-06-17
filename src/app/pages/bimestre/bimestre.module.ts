@@ -6,12 +6,14 @@ import {FormsModule} from '@angular/forms';
 import {BimestreService} from '../../shared/services/bimestre.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {MateriaService} from '../../shared/services/materia.service';
+import {NgBusyModule} from 'ng-busy';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    BimestreRoutingModule
+    BimestreRoutingModule,
+    NgBusyModule
   ],
   declarations: [
     BimestreComponent
