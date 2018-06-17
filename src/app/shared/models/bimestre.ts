@@ -4,7 +4,7 @@ export class Bimestre {
   gestion = 2018;
   idDocente = null;
   idEstudiante = null;
-  idMateria = 1;
+  idMateria = null;
 }
 
 export class BimestreFilter {

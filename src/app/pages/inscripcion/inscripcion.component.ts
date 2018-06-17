@@ -138,7 +138,7 @@ export class InscripcionComponent implements OnInit {
             'bimestre': i,
             'decirPromedio': 0,
             'estudiante': this.findEstudent(parseFloat(form.value.estudiante)),
-            'gestion': 0,
+            'gestion': (new Date()).getFullYear(),
             'hacerPromedio': 0,
             'idCurso': parseFloat(form.value.curso),
             'idDocente': 0,
