@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActividadCivicaService} from '../../shared/services/actividad-civica.service';
 import {DocenteFilter} from '../../shared/models/docente';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,8 @@ export class CursoComponent implements OnInit {
   totalEstudiantes: number;
   pageSize: number;
   page: number;
+
+  @ViewChild('modalHorario') modalHorario: ElementRef;
 
 
   modal: NgbModalRef;
@@ -57,7 +59,7 @@ export class CursoComponent implements OnInit {
       canFilter: false,
       pattern: '',
       messageError: '',
-      type: 'actionsView'
+      type: 'actionsInscripcion'
     }
   ];
 
@@ -112,7 +114,10 @@ export class CursoComponent implements OnInit {
   clickButtonRow(event) {
     if (event.description === 'view') {
       this.router.navigate(['/bimestre', event.item.id, 2]);
+    } else if (event.description === 'horario') {
+      this.openModal(this.modalHorario);
     }
+
   }
 
   clickPagination(event: any) {

@@ -59,6 +59,12 @@
                 <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')"></i>
                 <i class="fa fa-eye fa-lg" (click)="clickButtonRow(item,col,i,$event,'view')"></i>
               </div>
+              <div *ngIf="col.type === 'actionsInscripcion'">
+                <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'edit')" style="margin-left: 5px;"></i>
+                <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')" style="margin-left: 5px;"></i>
+                <i class="fa fa-eye fa-lg" (click)="clickButtonRow(item,col,i,$event,'view')" style="margin-left: 5px;"></i>
+                <i class="fa fa-calendar fa-lg" (click)="clickButtonRow(item,col,i,$event,'horario')" style="margin-left: 5px;"></i>
+              </div>
               <div *ngIf="col.type === 'userActions'">
                 <button class="btn btn-sm btn-outline-info" (click)="clickButtonRow(item,col,i,$event,'editUser')">
                   <i class="mdi mdi-lead-pencil"></i> Editar
@@ -106,28 +112,31 @@
     <div class="col-sm-12 d-flex justify-content-center mb-3">
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li>
-          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="updatePagination(1)">
+          <button [disabled]="pager.currentPage === 1" (click)="updatePagination(1)"
+                  style="background: none; border: none;">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-          </a>
+          </button>
         </li>
         <li>
-          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="updatePagination(pager.currentPage - 1)">
+          <button [disabled]="pager.currentPage === 1" (click)="updatePagination(pager.currentPage - 1)"
+                  style="background: none; border: none;">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
-          </a>
+          </button>
         </li>
         <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
           <a (click)="updatePagination(page)">{{page}}</a>
         </li>
         <li>
-          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-             (click)="updatePagination(pager.currentPage + 1)">
+          <button [disabled]="pager.currentPage === pager.totalPages" (click)="updatePagination(pager.currentPage + 1)"
+                  style="background: none; border: none;">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
-          </a>
+          </button>
         </li>
         <li>
-          <a [ngClass]="{disabled:pager.currentPage >= pager.totalPages}" (click)="updatePagination(pager.totalPages)">
+          <button [disabled]="pager.currentPage >= pager.totalPages" (click)="updatePagination(pager.totalPages)"
+                  style="background: none; border: none;">
             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
