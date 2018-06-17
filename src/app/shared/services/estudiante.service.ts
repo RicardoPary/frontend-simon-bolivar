@@ -32,7 +32,7 @@ export class EstudianteService {
       'size': estudianteFilter.size,
       'sort': estudianteFilter.sort
     });
-    return this.http.get(`${this.urlResource}/all`, {params: params, observe: 'response'});
+    return this.http.get(`${this.urlResource}`, {params: params, observe: 'response'});
   }
 
   createEstudiante(body: any): Observable<HttpResponse<any>> {

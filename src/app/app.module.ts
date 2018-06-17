@@ -12,6 +12,7 @@ import {LoginService} from './shared/auth';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import {httpFactoryProvider, RequestInterceptor} from './shared/interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import {AlertService} from './shared/components/alert/alert.service';
 // AoT requires an exported function for factories
 
 
@@ -31,6 +32,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
+    AlertService,
     AuthGuard,
     httpFactoryProvider(),
     [{

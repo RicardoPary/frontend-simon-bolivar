@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Bimestre} from './bimestre';
 import {BimestreFilter} from '../../shared/models/bimestre';
 import {Subscription} from 'rxjs/internal/Subscription';
+import {AlertService} from '../../shared/components/alert/alert.service';
 
 @Component({
   selector: 'app-bimestre',
@@ -27,11 +28,13 @@ export class BimestreComponent implements OnInit {
   bimestreValue: any;
   materiaValue: any;
   gestionValue: any;
+  readonlyValue = true;
 
   constructor(private bimestreService: BimestreService,
               private cursoService: CursoService,
               private route: ActivatedRoute,
-              private materiaService: MateriaService) {
+              private materiaService: MateriaService,
+              private alertService: AlertService) {
 
     this.bimestreService.currentBimestreFilter().subscribe(
       dates => {
@@ -92,8 +95,14 @@ export class BimestreComponent implements OnInit {
   saveBimestre() {
     this.bimestres.map(
       item => {
+        item.serPromedio = this.getPromedio(item.notaSer1, item.notaSer2, item.notaSer3, item.notaSer4, item.notaSer5, item.notaSer6);
+        item.saberPromedio = this.getPromedio(item.notaSaber1, item.notaSaber2, item.notaSaber3, item.notaSaber4, item.notaSaber5, item.notaSaber6);
+        item.hacerPromedio = this.getPromedio(item.notaHacer1, item.notaHacer2, item.notaHacer3, item.notaHacer4, item.notaHacer5, item.notaHacer6);
+        item.decirPromedio = this.getPromedio(item.notaDecir1, item.notaDecir2, item.notaDecir3, item.notaDecir4, item.notaDecir5, item.notaDecir6);
+
         this.bimestreService.modifyBimestre(item).subscribe(
           res => {
+            this.alertService.showSuccess({html: 'se guardo exitosamente.'})
             console.log(res);
           }
         );
