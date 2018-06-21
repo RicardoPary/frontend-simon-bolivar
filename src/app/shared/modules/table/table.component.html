@@ -50,20 +50,32 @@
               </div>
               <div *ngIf="col.type === 'money'">{{ item[col.name] | number:'1.2' || '' }} Bs</div>
 
-              <div *ngIf="col.type === 'actions'">
-                <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'editProduct')"></i>
-                <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'deleteProduct')"></i>
+              <div *ngIf="col.type === 'actions'" class="btn-group">
+                <button type="button" style="margin-left: 5px;" class="btn btn-primary btn-sm" (click)="clickButtonRow(item,col,i,$event,'edit')">
+                  <i class="fa fa-edit fa-lg"  ></i>
+                </button>
+                <button type="button" style="margin-left: 5px;" class="btn btn-danger btn-sm" (click)="clickButtonRow(item,col,i,$event,'delete')">
+                  <i class="fa fa-trash-o fa-lg"  ></i>
+                </button>
               </div>
               <div *ngIf="col.type === 'actionsView'">
-                <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'edit')"></i>
-                <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')"></i>
-                <i class="fa fa-eye fa-lg" (click)="clickButtonRow(item,col,i,$event,'view')"></i>
-              </div>
-              <div *ngIf="col.type === 'actionsInscripcion'">
                 <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'edit')" style="margin-left: 5px;"></i>
                 <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')" style="margin-left: 5px;"></i>
                 <i class="fa fa-eye fa-lg" (click)="clickButtonRow(item,col,i,$event,'view')" style="margin-left: 5px;"></i>
-                <i class="fa fa-calendar fa-lg" (click)="clickButtonRow(item,col,i,$event,'horario')" style="margin-left: 5px;"></i>
+              </div>
+              <div *ngIf="col.type === 'actionsInscripcion'" class="btn-group">
+                <button type="button" style="margin-left: 5px; display: inline-block;" class="btn btn-primary btn-sm" (click)="clickButtonRow(item,col,i,$event,'edit')">
+                  <i class="fa fa-edit fa-lg"  ></i>
+                </button>
+                <button type="button" style="margin-left: 5px; display: inline-block;" class="btn btn-danger btn-sm" (click)="clickButtonRow(item,col,i,$event,'delete')">
+                  <i class="fa fa-trash-o fa-lg"  ></i>
+                </button>
+                <button type="button" style="margin-left: 5px; display: inline-block;" class="btn btn-success btn-sm" (click)="clickButtonRow(item,col,i,$event,'view')">
+                  <i class="fa fa-eye fa-lg"  ></i>
+                </button>
+                <button type="button" style="margin-left: 5px; display: inline-block;" class="btn btn-info btn-sm" (click)="clickButtonRow(item,col,i,$event,'horario')">
+                  <i class="fa fa-calendar fa-lg"  ></i>
+                </button>
               </div>
               <div *ngIf="col.type === 'userActions'">
                 <button class="btn btn-sm btn-outline-info" (click)="clickButtonRow(item,col,i,$event,'editUser')">

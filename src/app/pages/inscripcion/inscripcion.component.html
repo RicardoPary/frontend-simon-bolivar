@@ -32,7 +32,7 @@
   <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
 
 
-
+    Estudiante :
     <select class="mdb-select"
             name="estudiante"
             id="estudiante"
@@ -41,8 +41,8 @@
         {{estudiante.paterno + ' ' + estudiante.materno + ' ' +estudiante.nombre }}
       </option>
     </select>
-
-
+   <br> <br>
+    Curso    :
     <select class="mdb-select"
             name="curso"
             id="curso"
@@ -51,7 +51,7 @@
         {{curso.nombre}}
       </option>
     </select>
-
+    <br>
 
 
     <div class="modal-footer">

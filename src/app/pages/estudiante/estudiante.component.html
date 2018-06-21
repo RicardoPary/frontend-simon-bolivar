@@ -2,11 +2,11 @@
   <h3 style="font-family: sans-serif;"> REGISTRO DE ESTUDIANTES
     <span class="btn-options pull-right">
       <a class="btn btn-sm btn-outline-secondary btn-icon-space"
-         (click)="openModal(modalEstudiante)"><i
+         (click)="openModal(modalEstudiante, 'Crear Nuevo Estudiante', 'Crear')"><i
         class="icon-user-plus"></i> Nuevo Estudiante</a>
     </span>
   </h3>
-  <div class="table-box">
+  <div class="table-box" [ngBusy]="{busy: subscriptionTable, message: 'Cargando...'}">
     <app-table
       [data]="estudiantes"
       [headers]="headersColumns"
@@ -15,7 +15,8 @@
       [filtersColumns]="filtersColumns"
       [page]="page"
       (clickPagination)="clickPagination($event)"
-      (clickSort)="clickSort($event)">
+      (clickSort)="clickSort($event)"
+      (clickButton)="clickButtonRow($event)">
     </app-table>
   </div>
 </div>
@@ -26,7 +27,7 @@
 
 <ng-template #modalEstudiante>
   <div class="modal-header">
-    <h4 class="modal-title">Crear Estudiante</h4>
+    <h4 class="modal-title">{{titleModal}}</h4>
   </div>
 
   <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
@@ -40,7 +41,7 @@
                  type="text"
                  class="form-control"
                  #ci
-                 ngModel/>
+                 [ngModel]="estudiante?.ci"/>
         </div>
 
       </div>
@@ -52,7 +53,7 @@
                  name="nombre"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.nombre"/>
         </div>
       </div>
 
@@ -63,7 +64,7 @@
                  name="paterno"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.paterno"/>
         </div>
       </div>
 
@@ -74,7 +75,7 @@
                  name="materno"
                  type="string"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.materno"/>
 
         </div>
       </div>
@@ -86,7 +87,7 @@
                  name="genero"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.genero"/>
         </div>
       </div>
 
@@ -97,7 +98,7 @@
                  name="fechaNacimiento"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.fechaNacimiento"/>
         </div>
       </div>
 
@@ -108,7 +109,7 @@
                  name="nacionalidad"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.nacionalidad"/>
         </div>
       </div>
 
@@ -119,7 +120,7 @@
                  name="direccion"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.direccion"/>
         </div>
       </div>
 
@@ -131,7 +132,7 @@
                  name="telefono"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.telefono"/>
         </div>
       </div>
 
@@ -142,7 +143,7 @@
                  name="matricula"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.matricula"/>
         </div>
       </div>
 
@@ -153,7 +154,7 @@
                  name="tipo"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="estudiante?.tipo"/>
         </div>
       </div>
     </div>
@@ -163,7 +164,7 @@
         Cancelar
       </button>
       <button type="submit" class="btn btn-primary">
-        Guardar
+        {{textButton}}
       </button>
     </div>
 

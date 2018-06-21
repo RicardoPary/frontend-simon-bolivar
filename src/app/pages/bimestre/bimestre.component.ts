@@ -102,7 +102,7 @@ export class BimestreComponent implements OnInit {
 
         this.bimestreService.modifyBimestre(item).subscribe(
           res => {
-            this.alertService.showSuccess({html: 'se guardo exitosamente.'})
+            this.alertService.showSuccess({html: 'se guardo exitosamente.'});
             console.log(res);
           }
         );

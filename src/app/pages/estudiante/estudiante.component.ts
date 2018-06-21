@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {EstudianteService} from '../../shared/services/estudiante.service';
 import {PersonaService} from '../../shared/services/persona.service';
 import {EstudianteFilter} from '../../shared/models/estudiante';
 import {DocenteFilter} from '../../shared/models/docente';
+import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../shared/components/alert/alert.service';
+import {Subscription} from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-estudiante',
@@ -12,14 +15,19 @@ import {DocenteFilter} from '../../shared/models/docente';
 })
 export class EstudianteComponent implements OnInit {
 
+  @ViewChild('modalEstudiante') modalEstudiante: ElementRef;
   estudiantes: any = [];
   filtersColumns: any;
   totalEstudiantes: number;
   pageSize: number;
   page: number;
-
-
   modal: NgbModalRef;
+  estudiante: any;
+
+  titleModal: any;
+  textButton: any;
+
+  subscriptionTable: Subscription = new Subscription();
 
   headersColumns: any = [
     {
@@ -125,7 +133,8 @@ export class EstudianteComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
               private estudianteService: EstudianteService,
-              private personaService: PersonaService) {
+              private personaService: PersonaService,
+              private alertService: AlertService) {
 
     this.estudianteService.currentEstudianteFilter().subscribe(
       dates => {
@@ -141,46 +150,55 @@ export class EstudianteComponent implements OnInit {
   }
 
   callService(estudianteFilter: EstudianteFilter) {
-    this.estudianteService.getAllEstudiantes(estudianteFilter).subscribe(res => {
+    this.subscriptionTable = this.estudianteService.getAllEstudiantes(estudianteFilter).subscribe(res => {
       this.totalEstudiantes = parseFloat(res.headers.get('X-Total-Count'));
       this.estudiantes = res.body;
     });
   }
 
-  openModal(content) {
+  openModal(content, titleModal, textButton) {
     this.modal = this.modalService.open(content, {backdrop: 'static', size: 'lg'});
+    this.titleModal = titleModal;
+    this.textButton = textButton;
+    if (this.textButton === 'Crear') {
+      this.estudiante = null;
+    }
   }
 
   submitEstudiante(form) {
-    this.personaService.createPersona({
+    const estudiante = {
+      'id': this.estudiante ? this.estudiante.id : null,
       'ci': form.value.ci,
+      'direccion': form.value.direccion,
+      'fechaNacimiento': form.value.fechaNacimiento,
+      'genero': form.value.genero,
+      'materno': form.value.materno,
+      'matricula': form.value.matricula,
+      'nacionalidad': form.value.nacionalidad,
       'nombre': form.value.nombre,
       'paterno': form.value.paterno,
-      'materno': form.value.materno,
-      'genero': form.value.genero,
-      'fechaNacimiento': form.value.fechaNacimiento,
-      'nacionalidad': form.value.nacionalidad,
-      'direccion': form.value.direccion,
-      'telefono': parseFloat(form.value.telefono)
-    }).subscribe(
-      res => {
-        this.estudianteService.createEstudiante({
-          'matricula': form.value.matricula,
-          'tipo': form.value.tipo,
-          'idPersona': res.body.id
-        }).subscribe(
-          res2 => {
-            this.estudianteService.sendEstudianteFilter(new DocenteFilter());
-            this.estudianteService.sendEstudianteFilter(new DocenteFilter());
-            this.modal.close();
-          }
+      'telefono': parseFloat(form.value.telefono),
+      'tipo': form.value.tipo
+    };
+    if (this.textButton === 'Crear') {
+      this.estudianteService.createEstudiante(estudiante)
+        .pipe(finalize(() => {
+          this.estudianteService.sendEstudianteFilter(new EstudianteFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'estudiante creado exitosamente.'})
         );
-
-
-      }
-    );
-
-
+    } else if (this.textButton === 'Editar') {
+      this.estudianteService.modifyEstudiante(estudiante)
+        .pipe(finalize(() => {
+          this.estudianteService.sendEstudianteFilter(new EstudianteFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'estudiante modificado exitosamente.'})
+      );
+    }
   }
 
   closeModal() {
@@ -201,4 +219,22 @@ export class EstudianteComponent implements OnInit {
     this.estudianteService.sendEstudianteFilter(filter);
   }
 
+  clickButtonRow(event) {
+    if (event.description === 'delete') {
+      this.alertService.showWarningQuestion({html: 'esta seguro de eliminar al estudiante ?'}, isConfirm => {
+        if (isConfirm.value) {
+          console.log('true');
+          this.estudianteService.deleteEstudiante(event.item.id)
+            .pipe(finalize(() => this.estudianteService.sendEstudianteFilter(new EstudianteFilter())))
+            .subscribe(
+              res => this.alertService.showSuccess({html: 'estudiante eliminado exitosamente.'}),
+              err => this.alertService.showError({html: 'ocurrio un error al eliminar el estudiante.'})
+            );
+        }
+      });
+    } else if (event.description === 'edit') {
+      this.openModal(this.modalEstudiante, 'Editar Estudiante', 'Editar');
+      this.estudiante = event.item;
+    }
+  }
 }

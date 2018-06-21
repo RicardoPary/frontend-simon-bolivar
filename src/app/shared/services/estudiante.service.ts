@@ -39,8 +39,8 @@ export class EstudianteService {
     return this.http.post(`${this.urlResource}`, body, {observe: 'response'});
   }
 
-  deleteEstudiante(): Observable<HttpResponse<any>> {
-    return this.http.delete(`${this.urlResource}`, {observe: 'response'});
+  deleteEstudiante(id: any): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.urlResource}/${id}`, {observe: 'response'});
   }
 
   modifyEstudiante(body: any): Observable<HttpResponse<any>> {
