@@ -105,6 +105,7 @@ $topnav-background-color: #1a2226;
 }
 
 .nested-menu {
+  background: #1a2226;
   .list-group-item {
     cursor: pointer;
     background: #2c3b41;
@@ -118,10 +119,13 @@ $topnav-background-color: #1a2226;
     list-style-type: none;
     height: auto;
     li {
+      margin-left: -40px;
       a {
         color: #fff;
         padding: 8px;
+        padding-left: 40px;
         display: block;
+        text-decoration: none;
       }
     }
   }
