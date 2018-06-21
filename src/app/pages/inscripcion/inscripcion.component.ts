@@ -9,6 +9,8 @@ import {InscripcionFilter} from '../../shared/models/inscripcion';
 import {CursoService} from '../../shared/services/curso.service';
 import {CursoFilter} from '../../shared/models/curso';
 import {BimestreService} from '../../shared/services/bimestre.service';
+import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../shared/components/alert/alert.service';
 
 @Component({
   selector: 'app-inscripcion',
@@ -70,8 +72,8 @@ export class InscripcionComponent implements OnInit {
     {
       name: '',
       displayName: 'Acciones',
-      canSort: true,
-      canFilter: true,
+      canSort: false,
+      canFilter: false,
       pattern: '',
       messageError: '',
       type: 'actions'
@@ -83,7 +85,8 @@ export class InscripcionComponent implements OnInit {
               private inscripcionService: InscripcionService,
               private estudianteService: EstudianteService,
               private cursoService: CursoService,
-              private bimestreService: BimestreService) {
+              private bimestreService: BimestreService,
+              private alertService: AlertService) {
 
     this.inscripcionService.currentInscripcionFilter().subscribe(
       dates => {
@@ -124,13 +127,13 @@ export class InscripcionComponent implements OnInit {
     this.inscripcionService.createInscripcion({
       'idCurso': parseFloat(form.value.curso),
       'idEstudiante': parseFloat(form.value.estudiante)
-    }).subscribe(
+    })
+      .pipe(finalize(() => {
+        this.closeModal();
+        this.inscripcionService.sendInscripcionFilter(new InscripcionFilter());
+      }))
+      .subscribe(
       res => {
-        console.log(res);
-
-
-
-
         for (let i = 0; i < 4; i++) {
           this.bimestreService.createBimestre({
             'autoevaluacionDecir': 0,
@@ -175,15 +178,12 @@ export class InscripcionComponent implements OnInit {
             'saberPromedio': 0,
             'serPromedio': 0
           }).subscribe(
-            ress => console.log(ress)
+            () => this.alertService.showSuccess({html: 'estudiante inscrito exitosamente.'}),
+            () => this.alertService.showError({html: 'hubo un error al inscribir al estudiante.'})
           );
         }
-
-        this.closeModal();
       }
     );
-
-
   }
 
   findEstudent(id) {
