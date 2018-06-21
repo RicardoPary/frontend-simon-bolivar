@@ -29,40 +29,44 @@
     <h4 class="modal-title">Nueva Inscripcion</h4>
   </div>
 
-  <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
+
+    <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
+      <div class="container row">
+      <div class="form-group col-6">
+        <label for="estudiante">Estudiante :</label>
+        <select class="form-control"
+                name="estudiante"
+                id="estudiante"
+                ngModel>
+          <option [value]="estudiante.id" *ngFor="let estudiante of estudiantes">
+            {{estudiante.paterno + ' ' + estudiante.materno + ' ' +estudiante.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-6">
+        <label for="curso">Curso :</label>
+        <select class="form-control"
+                name="curso"
+                id="curso"
+                ngModel>
+          <option [value]="curso.id" *ngFor="let curso of cursos">
+            {{curso.nombre}}
+          </option>
+        </select>
+      </div>
+
+      <div class="modal-footer col-12">
+        <button type="button" class="btn btn-secondary" (click)="closeModal();">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">
+          Guardar
+        </button>
+      </div>
+      </div>
+    </form>
 
 
-    Estudiante :
-    <select class="mdb-select"
-            name="estudiante"
-            id="estudiante"
-            ngModel>
-      <option [value]="estudiante.id" *ngFor="let estudiante of estudiantes">
-        {{estudiante.paterno + ' ' + estudiante.materno + ' ' +estudiante.nombre }}
-      </option>
-    </select>
-   <br> <br>
-    Curso    :
-    <select class="mdb-select"
-            name="curso"
-            id="curso"
-            ngModel>
-      <option [value]="curso.id" *ngFor="let curso of cursos">
-        {{curso.nombre}}
-      </option>
-    </select>
-    <br>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="closeModal();">
-        Cancelar
-      </button>
-      <button type="submit" class="btn btn-primary">
-        Guardar
-      </button>
-    </div>
-
-  </form>
 </ng-template>
 
