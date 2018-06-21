@@ -2,7 +2,7 @@
   <h3 style="font-family: sans-serif;"> REGISTRO ACTIVIDAD CIVICA
     <span class="btn-options pull-right">
       <a class="btn btn-sm btn-outline-secondary btn-icon-space"
-         (click)="openModal(modalEstudiante)"><i
+         (click)="openModal(modalActividadCivica,'Crear Nueva Actividad Civica', 'Crear')"><i
         class="icon-user-plus"></i> Crear actividad civica</a>
     </span>
   </h3>
@@ -15,7 +15,8 @@
       [filtersColumns]="filtersColumns"
       [page]="page"
       (clickPagination)="clickPagination($event)"
-      (clickSort)="clickSort($event)">
+      (clickSort)="clickSort($event)"
+      (clickButton)="clickButtonRow($event)">
     </app-table>
   </div>
 </div>
@@ -24,9 +25,9 @@
 </div>
 
 
-<ng-template #modalEstudiante>
+<ng-template #modalActividadCivica>
   <div class="modal-header">
-    <h4 class="modal-title">Crear Actividad Civica</h4>
+    <h4 class="modal-title">{{titleModal}}</h4>
   </div>
 
   <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
@@ -39,7 +40,7 @@
                  name="cronograma"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="actividadCivica?.cronograma"/>
         </div>
 
       </div>
@@ -51,7 +52,7 @@
                  name="descripcion"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="actividadCivica?.descripcion"/>
         </div>
       </div>
 
@@ -62,7 +63,7 @@
                  name="fecha"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="actividadCivica?.fecha"/>
         </div>
       </div>
 
@@ -73,7 +74,7 @@
                  name="nombre"
                  type="string"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="actividadCivica?.nombre"/>
 
         </div>
       </div>
@@ -84,7 +85,7 @@
         Cancelar
       </button>
       <button type="submit" class="btn btn-primary">
-        Guardar
+        {{textButton}}
       </button>
     </div>
 

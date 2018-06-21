@@ -3,7 +3,7 @@
   <h3 style="font-family: sans-serif;"> REGISTRO REUNIONES
     <span class="btn-options pull-right">
       <a class="btn btn-sm btn-outline-secondary btn-icon-space"
-         (click)="openModal(modalEstudiante)"><i
+         (click)="openModal(modalReunion, 'Crear Nueva Reunion', 'Crear')"><i
         class="icon-user-plus"></i> Crear Reunion</a>
     </span>
   </h3>
@@ -16,7 +16,8 @@
       [filtersColumns]="filtersColumns"
       [page]="page"
       (clickPagination)="clickPagination($event)"
-      (clickSort)="clickSort($event)">
+      (clickSort)="clickSort($event)"
+      (clickButton)="clickButtonRow($event)">>
     </app-table>
   </div>
 </div>
@@ -26,9 +27,9 @@
 </div>
 
 
-<ng-template #modalEstudiante>
+<ng-template #modalReunion>
   <div class="modal-header">
-    <h4 class="modal-title">Crear Reunion</h4>
+    <h4 class="modal-title">{{titleModal}}</h4>
   </div>
 
   <form (ngSubmit)="submitEstudiante(form)" #form="ngForm">
@@ -41,7 +42,7 @@
                  name="descripcion"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.descripcion"/>
         </div>
 
       </div>
@@ -53,7 +54,7 @@
                  name="detalle"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.detalle"/>
         </div>
       </div>
 
@@ -64,7 +65,7 @@
                  name="fecha"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.fecha"/>
         </div>
       </div>
 
@@ -75,7 +76,7 @@
                  name="hora"
                  type="string"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.hora"/>
 
         </div>
       </div>
@@ -87,7 +88,7 @@
                  name="lugar"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.lugar"/>
         </div>
       </div>
 
@@ -98,7 +99,7 @@
                  name="nombre"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.nombre"/>
         </div>
       </div>
 
@@ -109,7 +110,7 @@
                  name="ordenDia"
                  type="text"
                  class="form-control"
-                 ngModel/>
+                 [ngModel]="reunion?.ordenDia"/>
         </div>
       </div>
 
@@ -119,7 +120,7 @@
         Cancelar
       </button>
       <button type="submit" class="btn btn-primary">
-        Guardar
+        {{textButton}}
       </button>
     </div>
 

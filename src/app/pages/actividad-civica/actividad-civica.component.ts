@@ -1,7 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {DocenteFilter} from '../../shared/models/docente';
 import {ActividadCivicaService} from '../../shared/services/actividad-civica.service';
+import {finalize} from 'rxjs/operators';
+import {EstudianteFilter} from '../../shared/models/estudiante';
+import {AlertService} from '../../shared/components/alert/alert.service';
+import {ActividadCivicaFilter} from '../../shared/models/actividad-civica';
 
 @Component({
   selector: 'app-actividad-civica',
@@ -10,6 +14,7 @@ import {ActividadCivicaService} from '../../shared/services/actividad-civica.ser
 })
 export class ActividadCivicaComponent implements OnInit {
 
+  @ViewChild('modalActividadCivica') modalActividadCivica: ElementRef;
   estudiantes: any = [];
   filtersColumns: any;
   totalEstudiantes: number;
@@ -18,6 +23,9 @@ export class ActividadCivicaComponent implements OnInit {
 
 
   modal: NgbModalRef;
+  titleModal: any;
+  textButton: any;
+  actividadCivica: any;
 
   headersColumns: any = [
     {
@@ -59,8 +67,8 @@ export class ActividadCivicaComponent implements OnInit {
     {
       name: '',
       displayName: 'Acciones',
-      canSort: true,
-      canFilter: true,
+      canSort: false,
+      canFilter: false,
       pattern: '',
       messageError: '',
       type: 'actions'
@@ -68,7 +76,8 @@ export class ActividadCivicaComponent implements OnInit {
   ];
 
   constructor(private modalService: NgbModal,
-              private actividadCivicaService: ActividadCivicaService) {
+              private actividadCivicaService: ActividadCivicaService,
+              private alertService: AlertService) {
 
     this.actividadCivicaService.currentActividadCivicaFilter().subscribe(
       dates => {
@@ -90,19 +99,32 @@ export class ActividadCivicaComponent implements OnInit {
   }
 
   submitEstudiante(form) {
-    this.actividadCivicaService.modifyActividadCivica({
+    const actividadCivica = {
+      'id': this.actividadCivica ? this.actividadCivica.id : null,
       'cronograma': form.value.cronograma,
       'descripcion': form.value.descripcion,
       'fecha': form.value.fecha,
       'nombre': form.value.nombre
-    }).subscribe(
-      res => {
-        this.actividadCivicaService.sendActividadCivicaFilter(new DocenteFilter());
-        this.actividadCivicaService.sendActividadCivicaFilter(new DocenteFilter());
-        this.modal.close();
-
-      }
-    );
+    };
+    if (this.textButton === 'Crear') {
+      this.actividadCivicaService.createActividadCivica(actividadCivica)
+        .pipe(finalize(() => {
+          this.actividadCivicaService.sendActividadCivicaFilter(new ActividadCivicaFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'actividad civica creada exitosamente.'})
+        );
+    } else if (this.textButton === 'Editar') {
+      this.actividadCivicaService.modifyActividadCivica(actividadCivica)
+        .pipe(finalize(() => {
+          this.actividadCivicaService.sendActividadCivicaFilter(new ActividadCivicaFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'actividad civica modificada exitosamente.'})
+        );
+    }
   }
 
   clickPagination(event: any) {
@@ -118,11 +140,35 @@ export class ActividadCivicaComponent implements OnInit {
     this.actividadCivicaService.sendActividadCivicaFilter(filter);
   }
 
-  openModal(content) {
+  openModal(content, titleModal, textButton) {
     this.modal = this.modalService.open(content, {backdrop: 'static', size: 'lg'});
+    this.titleModal = titleModal;
+    this.textButton = textButton;
+    if (this.textButton === 'Crear') {
+      this.actividadCivica = null;
+    }
   }
 
   closeModal() {
     this.modal.close();
+  }
+
+  clickButtonRow(event) {
+    if (event.description === 'delete') {
+      this.alertService.showWarningQuestion({html: 'esta seguro de eliminar la actividad civica ?'}, isConfirm => {
+        if (isConfirm.value) {
+          console.log('true');
+          this.actividadCivicaService.deleteActividadCivica(event.item.id)
+            .pipe(finalize(() => this.actividadCivicaService.sendActividadCivicaFilter(new ActividadCivicaFilter())))
+            .subscribe(
+              res => this.alertService.showSuccess({html: 'actividad civica eliminada exitosamente.'}),
+              err => this.alertService.showError({html: 'ocurrio un error al eliminar el actividad civica.'})
+            );
+        }
+      });
+    } else if (event.description === 'edit') {
+      this.openModal(this.modalActividadCivica, 'Editar Actividad Civica', 'Editar');
+      this.actividadCivica = event.item;
+    }
   }
 }

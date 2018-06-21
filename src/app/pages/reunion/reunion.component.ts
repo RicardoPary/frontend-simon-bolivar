@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {DocenteFilter} from '../../shared/models/docente';
 import {ReunionService} from '../../shared/services/reunion.service';
 import {ReunionFilter} from '../../shared/models/reunion';
+import {finalize} from 'rxjs/operators';
+import {AlertService} from '../../shared/components/alert/alert.service';
+import {ActividadCivicaFilter} from '../../shared/models/actividad-civica';
 
 @Component({
   selector: 'app-reunion',
@@ -11,14 +14,17 @@ import {ReunionFilter} from '../../shared/models/reunion';
 })
 export class ReunionComponent implements OnInit {
 
+  @ViewChild('modalReunion') modalReunion: ElementRef;
   estudiantes: any = [];
   filtersColumns: any;
   totalEstudiantes: number;
   pageSize: number;
   page: number;
 
-
   modal: NgbModalRef;
+  titleModal: any;
+  textButton: any;
+  reunion: any;
 
   headersColumns: any = [
     {
@@ -87,8 +93,8 @@ export class ReunionComponent implements OnInit {
     {
       name: '',
       displayName: 'Acciones',
-      canSort: true,
-      canFilter: true,
+      canSort: false,
+      canFilter: false,
       pattern: '',
       messageError: '',
       type: 'actions'
@@ -96,7 +102,8 @@ export class ReunionComponent implements OnInit {
   ];
 
   constructor(private modalService: NgbModal,
-              private reunionService: ReunionService) {
+              private reunionService: ReunionService,
+              private alertService: AlertService) {
 
     this.reunionService.currentReunionFilter().subscribe(
       dates => {
@@ -117,12 +124,18 @@ export class ReunionComponent implements OnInit {
     });
   }
 
-  openModal(content) {
+  openModal(content, titleModal, textButton) {
     this.modal = this.modalService.open(content, {backdrop: 'static', size: 'lg'});
+    this.titleModal = titleModal;
+    this.textButton = textButton;
+    if (this.textButton === 'Crear') {
+      this.reunion = null;
+    }
   }
 
   submitEstudiante(form) {
-    this.reunionService.postReunion({
+    const reunion = {
+      'id': this.reunion ? this.reunion.id : null,
       'descripcion': form.value.descripcion,
       'detalle': form.value.detalle,
       'fecha': form.value.fecha,
@@ -130,13 +143,27 @@ export class ReunionComponent implements OnInit {
       'lugar': form.value.lugar,
       'nombre': form.value.nombre,
       'ordenDia': form.value.ordenDia
-    }).subscribe(
-      res => {
-        this.reunionService.sendReunionFilter(new DocenteFilter());
-        this.reunionService.sendReunionFilter(new DocenteFilter());
-        this.modal.close();
-      }
-    );
+    };
+    if (this.textButton === 'Crear') {
+      this.reunionService.createReunion(reunion)
+        .pipe(finalize(() => {
+          this.reunionService.sendReunionFilter(new ReunionFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'reunion creada exitosamente.'})
+        );
+    } else if (this.textButton === 'Editar') {
+      this.reunionService.modifyReunion(reunion)
+        .pipe(finalize(() => {
+          this.reunionService.sendReunionFilter(new ReunionFilter());
+          this.modal.close();
+        }))
+        .subscribe(
+          () => this.alertService.showSuccess({html: 'reunion modificada exitosamente.'})
+        );
+    }
+
   }
 
   closeModal() {
@@ -154,5 +181,23 @@ export class ReunionComponent implements OnInit {
     const filter = this.reunionService.getReunionFilter();
     filter.sort = [event.column + ',' + state];
     this.reunionService.sendReunionFilter(filter);
+  }
+
+  clickButtonRow(event) {
+    if (event.description === 'delete') {
+      this.alertService.showWarningQuestion({html: 'esta seguro de eliminar la reunion ?'}, isConfirm => {
+        if (isConfirm.value) {
+          this.reunionService.deleteReunion(event.item.id)
+            .pipe(finalize(() => this.reunionService.sendReunionFilter(new ReunionFilter())))
+            .subscribe(
+              res => this.alertService.showSuccess({html: 'reunion eliminada exitosamente.'}),
+              err => this.alertService.showError({html: 'ocurrio un error al eliminar la reunion.'})
+            );
+        }
+      });
+    } else if (event.description === 'edit') {
+      this.openModal(this.modalReunion, 'Editar Reunion', 'Editar');
+      this.reunion = event.item;
+    }
   }
 }

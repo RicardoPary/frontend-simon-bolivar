@@ -40,8 +40,8 @@ export class ActividadCivicaService {
     return this.http.post(`${this.urlResource}`, body, {observe: 'response'});
   }
 
-  deleteActividadCivica(): Observable<HttpResponse<any>> {
-    return this.http.delete(`${this.urlResource}`, {observe: 'response'});
+  deleteActividadCivica(id: any): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.urlResource}/${id}`, {observe: 'response'});
   }
 
   modifyActividadCivica(body: any): Observable<HttpResponse<any>> {
