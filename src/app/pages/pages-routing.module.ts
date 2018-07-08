@@ -11,6 +11,7 @@ const routes: Routes = [
       {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
       {path: 'charts', loadChildren: './charts/charts.module#ChartsModule'},
       {path: 'bimestre/:idCurso/:idDocente', loadChildren: './bimestre/bimestre.module#BimestreModule'},
+      {path: 'estudiante/boletin', loadChildren: './boletin/boletin.module#BoletinModule'},
       {path: 'estudiante', loadChildren: './estudiante/estudiante.module#EstudianteModule'},
       {path: 'docente', loadChildren: './docente/docente.module#DocenteModule'},
       {path: 'tutor', loadChildren: './tutor/tutor.module#TutorModule'},

@@ -7,6 +7,7 @@ import {DocenteFilter} from '../../shared/models/docente';
 import {finalize} from 'rxjs/operators';
 import {AlertService} from '../../shared/components/alert/alert.service';
 import {Subscription} from 'rxjs/internal/Subscription';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-estudiante',
@@ -127,14 +128,15 @@ export class EstudianteComponent implements OnInit {
       canFilter: true,
       pattern: '',
       messageError: '',
-      type: 'actions'
+      type: 'actionsStudent'
     }
   ];
 
   constructor(private modalService: NgbModal,
               private estudianteService: EstudianteService,
               private personaService: PersonaService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private router: Router) {
 
     this.estudianteService.currentEstudianteFilter().subscribe(
       dates => {
@@ -235,6 +237,9 @@ export class EstudianteComponent implements OnInit {
     } else if (event.description === 'edit') {
       this.openModal(this.modalEstudiante, 'Editar Estudiante', 'Editar');
       this.estudiante = event.item;
+    } else if (event.description === 'bulletin') {
+      console.log('se hixo click');
+      this.router.navigate(['estudiante/boletin']);
     }
   }
 }

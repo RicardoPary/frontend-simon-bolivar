@@ -51,13 +51,26 @@
               <div *ngIf="col.type === 'money'">{{ item[col.name] | number:'1.2' || '' }} Bs</div>
 
               <div *ngIf="col.type === 'actions'" class="btn-group">
+              <button type="button" style="margin-left: 5px;" class="btn btn-primary btn-sm" (click)="clickButtonRow(item,col,i,$event,'edit')">
+                <i class="fa fa-edit fa-lg"  ></i>
+              </button>
+              <button type="button" style="margin-left: 5px;" class="btn btn-danger btn-sm" (click)="clickButtonRow(item,col,i,$event,'delete')">
+                <i class="fa fa-trash-o fa-lg"  ></i>
+              </button>
+            </div>
+
+              <div *ngIf="col.type === 'actionsStudent'" class="btn-group">
                 <button type="button" style="margin-left: 5px;" class="btn btn-primary btn-sm" (click)="clickButtonRow(item,col,i,$event,'edit')">
                   <i class="fa fa-edit fa-lg"  ></i>
                 </button>
                 <button type="button" style="margin-left: 5px;" class="btn btn-danger btn-sm" (click)="clickButtonRow(item,col,i,$event,'delete')">
                   <i class="fa fa-trash-o fa-lg"  ></i>
                 </button>
+                <button type="button" style="margin-left: 5px;" class="btn btn-danger btn-sm" (click)="clickButtonRow(item,col,i,$event,'bulletin')">
+                  <i class="fa fa-file fa-lg"></i>
+                </button>
               </div>
+
               <div *ngIf="col.type === 'actionsView'">
                 <i class="fa fa-edit fa-lg" (click)="clickButtonRow(item,col,i,$event,'edit')" style="margin-left: 5px;"></i>
                 <i class="fa fa-trash-o fa-lg" (click)="clickButtonRow(item,col,i,$event,'delete')" style="margin-left: 5px;"></i>
