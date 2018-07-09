@@ -1,6 +1,6 @@
 export class Bimestre {
   name = '';
-  bimestre = '1';
+  bimestre = null;
   gestion = 2018;
   idDocente = null;
   idEstudiante = null;
@@ -8,7 +8,7 @@ export class Bimestre {
 }
 
 export class BimestreFilter {
-  size = 10;
+  size = 40;
   page = 0;
   sort = ['id,desc'];
   bimestre: Bimestre = new Bimestre();

@@ -239,7 +239,7 @@ export class EstudianteComponent implements OnInit {
       this.estudiante = event.item;
     } else if (event.description === 'bulletin') {
       console.log('se hixo click');
-      this.router.navigate(['estudiante/boletin']);
+      this.router.navigate(['estudiante/boletin', event.item.id]);
     }
   }
 }

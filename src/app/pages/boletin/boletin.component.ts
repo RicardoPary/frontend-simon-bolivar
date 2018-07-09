@@ -6,6 +6,7 @@ import {BimestreService} from '../../shared/services/bimestre.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {BimestreFilter} from '../../shared/models/bimestre';
 import {ActivatedRoute} from '@angular/router';
+import {MateriaFilter} from '../../shared/models/materia';
 
 @Component({
   selector: 'app-boletin',
@@ -28,6 +29,7 @@ export class BoletinComponent implements OnInit {
   materiaValue: any;
   gestionValue: any;
   readonlyValue = true;
+  boletin = [];
 
   constructor(private bimestreService: BimestreService,
               private cursoService: CursoService,
@@ -37,6 +39,7 @@ export class BoletinComponent implements OnInit {
 
     this.bimestreService.currentBimestreFilter().subscribe(
       dates => {
+        dates.bimestre.idEstudiante = this.route.snapshot.params['idEstudiante'];
         this.pageSize = dates.size;
         this.page = dates.page;
         this.bimestreValue = dates.bimestre.bimestre;
@@ -50,15 +53,37 @@ export class BoletinComponent implements OnInit {
 
   ngOnInit() {
 
-    this.materiaService.getAllMateriasByIdCurso(this.route.snapshot.params['idCurso']).subscribe(
-      res => this.materias = res.body
-    );
+
 
   }
 
   callService(bimestreFilter: BimestreFilter) {
     this.subscriptionBimestreService = this.bimestreService.getAllBimestresByFilter(bimestreFilter).subscribe(res => {
-      console.log(res);
+      const materiaFilter = new MateriaFilter();
+      materiaFilter.page = null;
+      materiaFilter.size = null;
+      materiaFilter.sort = null;
+      this.materiaService.getAllMaterias(materiaFilter).subscribe(
+        resMateria => {
+          resMateria.body.map(
+            item => this.boletin.push({idMateria: item.id, promedioAnual: 0})
+          );
+          res.body.map(
+            item => {
+              this.boletin.map(
+                itemBoletin => {
+                  if (itemBoletin.idMateria === item.idMateria) {
+                    itemBoletin[item.bimestre] = item.notaBimestralFinal;
+                  }
+                }
+              );
+            }
+          );
+        }
+      );
+
+      console.log('Boletin' , this.boletin);
+
       this.totalBimestres = parseFloat(res.headers.get('X-Total-Count'));
       this.bimestres = res.body;
     });
