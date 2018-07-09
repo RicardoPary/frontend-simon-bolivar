@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {PersonaService} from '../../shared/services/persona.service';
 import {CursoService} from '../../shared/services/curso.service';
 import {BimestreService} from '../../shared/services/bimestre.service';
+import {MateriaService} from '../../shared/services/materia.service';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {BimestreService} from '../../shared/services/bimestre.service';
     EstudianteService,
     PersonaService,
     CursoService,
-    BimestreService
+    BimestreService,
+    MateriaService
   ]
 })
 export class InscripcionModule { }

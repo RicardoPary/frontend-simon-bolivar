@@ -11,6 +11,8 @@ import {CursoFilter} from '../../shared/models/curso';
 import {BimestreService} from '../../shared/services/bimestre.service';
 import {finalize} from 'rxjs/operators';
 import {AlertService} from '../../shared/components/alert/alert.service';
+import {MateriaService} from '../../shared/services/materia.service';
+import {MateriaFilter} from '../../shared/models/materia';
 
 @Component({
   selector: 'app-inscripcion',
@@ -86,7 +88,8 @@ export class InscripcionComponent implements OnInit {
               private estudianteService: EstudianteService,
               private cursoService: CursoService,
               private bimestreService: BimestreService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private materiaService: MateriaService) {
 
     this.inscripcionService.currentInscripcionFilter().subscribe(
       dates => {
@@ -134,54 +137,68 @@ export class InscripcionComponent implements OnInit {
       }))
       .subscribe(
       res => {
-        for (let i = 0; i < 4; i++) {
-          this.bimestreService.createBimestre({
-            'autoevaluacionDecir': 0,
-            'autoevaluacionSer': 0,
-            'bimestre': i,
-            'decirPromedio': 0,
-            'estudiante': this.findEstudent(parseFloat(form.value.estudiante)),
-            'gestion': (new Date()).getFullYear(),
-            'hacerPromedio': 0,
-            'idCurso': parseFloat(form.value.curso),
-            'idDocente': 0,
-            'idMateria': 0,
-            'indicadorCualitativo': 'ninguno',
-            'notaBimestralFinal': 0,
-            'notaDecir1': 0,
-            'notaDecir2': 0,
-            'notaDecir3': 0,
-            'notaDecir4': 0,
-            'notaDecir5': 0,
-            'notaDecir6': 0,
-            'notaHacer1': 0,
-            'notaHacer2': 0,
-            'notaHacer3': 0,
-            'notaHacer4': 0,
-            'notaHacer5': 0,
-            'notaHacer6': 0,
-            'notaSaber1': 0,
-            'notaSaber2': 0,
-            'notaSaber3': 0,
-            'notaSaber4': 0,
-            'notaSaber5': 0,
-            'notaSaber6': 0,
-            'notaSer1': 0,
-            'notaSer2': 0,
-            'notaSer3': 0,
-            'notaSer4': 0,
-            'notaSer5': 0,
-            'notaSer6': 0,
-            'observacion': 'ninguno',
-            'paralelo': 'ninguno',
-            'promedioAutoevaluacion': 0,
-            'saberPromedio': 0,
-            'serPromedio': 0
-          }).subscribe(
-            () => this.alertService.showSuccess({html: 'estudiante inscrito exitosamente.'}),
-            () => this.alertService.showError({html: 'hubo un error al inscribir al estudiante.'})
-          );
-        }
+        const materiaFilter = new MateriaFilter();
+        materiaFilter.page = null;
+        materiaFilter.size = null;
+        materiaFilter.sort = null;
+        this.materiaService.getAllMaterias(materiaFilter).subscribe(
+          resMateria => {
+            if (resMateria.body) {
+              resMateria.body.map(
+                item => {
+                  for (let i = 1; i <= 4; i++) {
+                    this.bimestreService.createBimestre({
+                      'autoevaluacionDecir': 0,
+                      'autoevaluacionSer': 0,
+                      'bimestre': i,
+                      'decirPromedio': 0,
+                      'estudiante': this.findEstudent(parseFloat(form.value.estudiante)),
+                      'gestion': (new Date()).getFullYear(),
+                      'hacerPromedio': 0,
+                      'idCurso': parseFloat(form.value.curso),
+                      'idDocente': 0,
+                      'idMateria': item.id,
+                      'indicadorCualitativo': 'ninguno',
+                      'notaBimestralFinal': 0,
+                      'notaDecir1': 0,
+                      'notaDecir2': 0,
+                      'notaDecir3': 0,
+                      'notaDecir4': 0,
+                      'notaDecir5': 0,
+                      'notaDecir6': 0,
+                      'notaHacer1': 0,
+                      'notaHacer2': 0,
+                      'notaHacer3': 0,
+                      'notaHacer4': 0,
+                      'notaHacer5': 0,
+                      'notaHacer6': 0,
+                      'notaSaber1': 0,
+                      'notaSaber2': 0,
+                      'notaSaber3': 0,
+                      'notaSaber4': 0,
+                      'notaSaber5': 0,
+                      'notaSaber6': 0,
+                      'notaSer1': 0,
+                      'notaSer2': 0,
+                      'notaSer3': 0,
+                      'notaSer4': 0,
+                      'notaSer5': 0,
+                      'notaSer6': 0,
+                      'observacion': 'ninguno',
+                      'paralelo': 'ninguno',
+                      'promedioAutoevaluacion': 0,
+                      'saberPromedio': 0,
+                      'serPromedio': 0
+                    }).subscribe(
+                      () => this.alertService.showSuccess({html: 'estudiante inscrito exitosamente.'}),
+                      () => this.alertService.showError({html: 'hubo un error al inscribir al estudiante.'})
+                    );
+                  }
+                }
+              );
+            }
+          }
+        );
       }
     );
   }
