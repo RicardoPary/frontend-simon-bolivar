@@ -1,10 +1,10 @@
 export class Bimestre {
   name = '';
-  bimestre = null;
+  bimestre = 1;
   gestion = 2018;
   idDocente = null;
   idEstudiante = null;
-  idMateria = null;
+  idMateria = 1;
 }
 
 export class BimestreFilter {

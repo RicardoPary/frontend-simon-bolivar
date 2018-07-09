@@ -7,6 +7,7 @@ import {Bimestre} from './bimestre';
 import {BimestreFilter} from '../../shared/models/bimestre';
 import {Subscription} from 'rxjs/internal/Subscription';
 import {AlertService} from '../../shared/components/alert/alert.service';
+import {MateriaFilter} from '../../shared/models/materia';
 
 @Component({
   selector: 'app-bimestre',
@@ -51,7 +52,16 @@ export class BimestreComponent implements OnInit {
 
   ngOnInit() {
 
-    this.materiaService.getAllMateriasByIdCurso(this.route.snapshot.params['idCurso']).subscribe(
+    /*this.materiaService.getAllMateriasByIdCurso(this.route.snapshot.params['idCurso']).subscribe(
+      res => this.materias = res.body
+    );*/
+
+    const materiaFilter = new MateriaFilter();
+    materiaFilter.page = null;
+    materiaFilter.size = null;
+    materiaFilter.sort = null;
+
+    this.materiaService.getAllMaterias(materiaFilter).subscribe(
       res => this.materias = res.body
     );
 
